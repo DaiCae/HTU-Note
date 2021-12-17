@@ -1,0 +1,244 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no, viewport-fit=cover">
+    <link href="css/weui.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css?v=1638525139" rel="stylesheet">
+
+    <title>师大移动学工用户中心</title>
+    <style>
+        .fixed-header,
+        .fixed-header+header.row.m-0,
+        .e-bg-primary {
+            background: #009688 !important;
+        }
+
+        .border-primary,
+        .e-border-primary {
+            border-color: #009688 !important;
+        }
+
+        .e-primary {
+            color: #009688 !important;
+        }
+
+        @media (max-width: 800px) {
+            .layui-header {
+                background: #009688 !important;
+            }
+        }
+    </style>
+
+
+    <script>
+        function submitFormCheck() {
+            var id = document.getElementById("id");
+            var name = document.getElementById("name");
+            var sex = document.getElementById("sex");
+            var depart = document.getElementById("depart");
+            var teacher = document.getElementById("teacher");
+            var pic = document.getElementById("viewImg");
+            if (id.value == '') {
+                alert("请输入学号!");
+                return false;
+            }
+            if (name.value == '') {
+                alert("请输入姓名!");
+                return false;
+            }
+            if (sex.value == '' || depart.value == '' || teacher.value == '') {
+                alert("请输入完整!");
+                return false;
+            }
+            if (pic.src == '') {
+                alert("请上传照片!");
+                return false;
+            }
+            var settings = {
+                "url": "http://home.***REMOVED***:5000/register",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "*/*"
+                },
+                "data": JSON.stringify({
+                    "id": id.value,
+                    "name": name.value,
+                    "sex": sex.value,
+                    "depart": depart.value,
+                    "teacher": teacher.value,
+                    "pic": pic.src,
+                }),
+            };
+
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+                if(response.code ==200){
+                    alert("注册成功!");
+                }else{
+                    alert(response.msg+"\n(信息请填写正确,图片请小于300k)");
+                }
+            });
+        }
+    </script>
+</head>
+
+<body class=" push-content-right theme-light ">
+    <div class="page vue-loading" style="position: absolute;overflow-y: auto">
+        <div id="content">
+            <header class="row m-0 fixed-header">
+                <div class="col center logo">&nbsp; 新建请假申请</div>
+            </header>
+            <div class="page-content">
+                <div style="padding: 0px 15px;">
+                    <div class="weui-cells__title">
+                        填写请假条
+                    </div>
+                    <form class="html-form">
+                        <div class="form-group"><label class=" control-label">学号 <span class="required-mark"
+                                    style="color: red;">*</span></label>
+                            <div><input id="id" name="id" type="text" placeholder="学号" class="form-control "
+                                    style="border: 1px solid rgb(229, 230, 231);"></div>
+                        </div>
+
+                        <div class="form-group"><label class=" control-label">姓名 <span class="required-mark"
+                                    style="color: red;">*</span></label>
+                            <div><input id="name" name="name" type="text" placeholder="姓名" class="form-control"
+                                    style="border: 1px solid rgb(229, 230, 231);"></div>
+                        </div>
+
+                        <div class="form-group"><label class=" control-label">性别 <span class="required-mark"
+                                    style="color: red;">*</span></label>
+                            <div><input id="sex" name="sex" type="text" placeholder="性别" class="form-control"
+                                    style="border: 1px solid rgb(229, 230, 231);"></div>
+                        </div>
+
+                        <div class="form-group"><label class=" control-label">学院年级 <span class="required-mark"
+                                    style="color: red;">*</span></label>
+                            <div><input id="depart" name="depart" type="text" placeholder="xx学院 20xx级"
+                                    class="form-control" style="border: 1px solid rgb(229, 230, 231);"></div>
+                        </div>
+
+                        <div class="form-group"><label class=" control-label">审核人 <span class="required-mark"
+                                    style="color: red;">*</span></label>
+                            <div><input id="teacher" name="teacher" type="text" placeholder="审核老师" class="form-control"
+                                    style="border: 1px solid rgb(229, 230, 231);"></div>
+                        </div>
+
+                        <div class="form-group"><label class=" control-label">照片 <span class="required-mark" style="color: red;">*</span></label>
+                            <div style="position: relative;">
+                                <input id="upLoad" name="pic1" style="position: absolute; top: 0; bottom: 0; left: 0;right: 0; opacity: 0;" type="file" accept=" image/jpg, image/png" />
+                                <div style="text-align: top">
+                                    <span style="font-size: 12px;">上传照片：</span>
+                                    <svg class="icon" style="width: 1em;height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;"
+                                        viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                        p-id="2208"> <path d="M955.769524 734.466768c-0.13917 0-4.313236-8.118911-9.275247-18.036795L816.444339 456.344422c-4.962012-9.923-18.093077-18.035772-29.181623-18.030655l-107.787912 0.033769c-11.089569 0.004093-20.163225 9.080819-20.163225 20.174482l0 34.266431c0 11.089569 9.073656 20.170388 20.163225 20.181645l34.267455 0.023536c11.094686 0.002047 24.193005 8.146541 29.116131 18.085914l92.175329 186.263218c4.916986 9.943466-0.128937 18.077727-11.224646 18.077727L677.409772 735.420489c-11.094686 0-20.169365 9.075703-20.169365 20.164249l0 105.501846c0 11.089569-9.074679 20.163225-20.167319 20.163225L383.359666 881.249809c-11.093662 0-20.169365-9.073656-20.169365-20.163225L363.190301 755.585761c0-11.088546-9.074679-20.164249-20.163225-20.164249L193.657116 735.421512c-11.094686 0-16.003486-8.066723-10.918677-17.923208l96.398514-186.870038c5.087878-9.856485 18.319228-17.911952 29.408797-17.906835l33.378202 0.022513c11.095709 0.005117 20.169365-9.063423 20.169365-20.151969l0-33.967626c0-11.095709-9.073656-20.164249-20.169365-20.164249l-107.283422 0.039909c-11.094686 0-24.242124 8.112772-29.226648 18.024515L74.71926 716.616214c-4.978385 9.907651-8.933463 18.014282-8.792247 18.014282 0.14224 0 0.260943 9.074679 0.260943 20.169365l0 183.128831c0 11.094686 9.067516 20.169365 20.162202 20.169365l849.507874 0c11.096732 0 20.169365-9.074679 20.169365-20.169365L956.027397 754.629993C956.020234 743.532237 955.908694 734.466768 955.769524 734.466768L955.769524 734.466768zM326.291926 294.249651l110.674659 0L436.966585 659.44205 585.181231 659.44205 585.181231 294.249651l116.595508 0c11.097756 0 14.150278-6.79373 6.794753-15.093766L524.899286 71.90875c-7.355525-8.299013-19.308765-8.226359-26.567076 0.158612L319.322188 278.997272C312.063877 287.388383 315.20338 294.249651 326.291926 294.249651L326.291926 294.249651zM326.291926 294.249651"
+                                            p-id="2209"></path>
+                                    </svg>
+                                </div><img style="height: 125px;width: 90px;" src="" id='viewImg' alt="上传图片" />
+                                <div class="required-mark-bottom mb-15" style="color: rgb(204, 204, 204);">标记有 <span style="color: red;">*</span> 的是必填项。</div>
+                                <div class="text-center mt-20"><input id="fun" type="button" value="提交" onclick="submitFormCheck()" class="weui-btn weui-btn_mini weui-btn_primary w-150 submit-btn"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="js/jquery-2.1.4.js"></script>
+
+<script>
+
+    $(function () {
+        $('#upLoad').on('change', function () {
+            var filePath = $(this).val(),         //获取到input的value，里面是文件的路径  
+                fileFormat = filePath.substring(filePath.lastIndexOf(".")).toLowerCase(),
+                imgBase64 = '',      //存储图片的imgBase64  
+                fileObj = document.getElementById('upLoad').files[0]; //上传文件的对象,要这样写才行，用jquery写法获取不到对象  
+
+            // 检查是否是图片  
+            if (!fileFormat.match(/.png|.jpg|.jpeg/)) {
+                alert('上传错误,文件格式必须为：png/jpg/jpeg');
+                return;
+            }
+
+            // 调用函数，对图片进行压缩  
+            compress(fileObj, function (imgBase64) {
+                imgBase64 = imgBase64;    //存储转换的base64编码  
+                $('#viewImg').attr('src', imgBase64); //显示预览图片
+                $("#picc").val(imgBase64);
+                var name = document.getElementById("picc");
+                console.log(name.value);
+            });
+        });
+
+        // 不对图片进行压缩，直接转成base64  
+        function directTurnIntoBase64(fileObj, callback) {
+            var r = new FileReader();
+            // 转成base64  
+            r.onload = function () {
+                //变成字符串  
+                imgBase64 = r.result;
+                console.log(imgBase64);
+                callback(imgBase64);
+            }
+            r.readAsDataURL(fileObj);    //转成Base64格式  
+        }
+
+        // 对图片进行压缩  
+        function compress(fileObj, callback) {
+            if (typeof (FileReader) === 'undefined') {
+                console.log("当前浏览器内核不支持base64图标压缩");
+                //调用上传方式不压缩
+                directTurnIntoBase64(fileObj, callback);
+            } else {
+                try {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var image = $('<img/>');
+                        image.load(function () {
+                            squareW = 90,
+                                squareH = 125,   //定义画布的大小，也就是图片压缩之后的像素  
+                                canvas = document.createElement('canvas'),
+                                context = canvas.getContext('2d'),
+                                imageWidth = 0,    //压缩图片的大小  
+                                imageHeight = 0,
+                                offsetX = 0,
+                                offsetY = 0,
+                                data = '';
+
+                            canvas.width = squareW;
+                            canvas.height = squareH;
+                            context.clearRect(0, 0, squareW, squareH);
+
+                            if (this.width > this.height) {
+                                imageWidth = Math.round(squareW * this.width / this.height);
+                                imageHeight = squareH;
+                                offsetX = - Math.round((imageWidth - squareW) / 2);
+                            } else {
+                                imageHeight = Math.round(squareW * this.height / this.width);
+                                imageWidth = squareW;
+                                offsetY = - Math.round((imageHeight - squareH) / 2);
+                            }
+                            context.drawImage(this, offsetX, offsetY, imageWidth, imageHeight);
+                            var data = canvas.toDataURL('image/jpeg');
+                            //压缩完成执行回调    
+                            callback(data);
+                        });
+                        image.attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(fileObj);
+                } catch (e) {
+                    console.log("压缩失败!");
+                    //调用直接上传方式  不压缩   
+                    directTurnIntoBase64(fileObj, callback);
+                }
+            }
+        }
+    });
+</script>
+</html>

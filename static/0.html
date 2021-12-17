@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no, viewport-fit=cover">
+    <link href="./jscss/weui.min.css" rel="stylesheet">
+    <link href="./jscss/bootstrap.min.css" rel="stylesheet">
+    <link href="./jscss/style.css" rel="stylesheet">
+    <link href="./jscss/line-awesome-nob.min.css" rel="stylesheet">
+    <script>var gconfig = { role: 'student', type: 'fdy', cname: '院系', uname: '庞栋' }; var COURSE_ID = 31030;</script>
+    <script src="./jscss/jquery-1.12.4.min.js"></script>
+    <script src="./jscss/weui.min.js"></script>
+    <script src="./jscss/app.js"></script>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <link rel="stylesheet" href="./jscss/helper.css">
+    <link rel="stylesheet" href="./jscss/main_vue.css">
+  
+  <title>师大移动学工用户中心</title>
+  <style>
+    .fixed-header,
+    .fixed-header+header.row.m-0,
+    .e-bg-primary {
+      background: #009688 !important;
+    }
+
+    .border-primary,
+    .e-border-primary {
+      border-color: #009688 !important;
+    }
+
+    .e-primary {
+      color: #009688 !important;
+    }
+
+    @media (max-width: 800px) {
+      .layui-header {
+        background: #009688 !important;
+      }
+    }
+  </style>
+  <style type="text/css">
+    ._th-container ._th-item {
+      margin-bottom: 3px;
+      position: relative;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      opacity: .3;
+      background-color: aquamarine;
+      border-radius: 100%;
+      text-align: center;
+      line-height: 30px;
+      -webkit-transition: all .35s;
+      -o-transition: all .35s;
+      transition: all .35s;
+      right: 30px
+    }
+
+    ._th-container ._th-item._item-x2 {
+      margin-left: 18px;
+      width: 40px;
+      height: 40px;
+      line-height: 40px
+    }
+
+    ._th-container ._th-item._item-x-2 {
+      margin-left: 17px;
+      width: 38px;
+      height: 38px;
+      line-height: 38px
+    }
+
+    ._th-container ._th-item._item-x4 {
+      width: 36px;
+      height: 36px;
+      margin-left: 16px;
+      line-height: 36px
+    }
+
+    ._th-container ._th-item._item-x-4 {
+      width: 32px;
+      height: 32px;
+      line-height: 32px;
+      margin-left: 14px
+    }
+
+    ._th-container ._th-item._item-reset {
+      width: 30px;
+      line-height: 30px;
+      height: 30px;
+      margin-left: 10px
+    }
+
+    ._th-click-hover {
+      position: relative;
+      -webkit-transition: all .5s;
+      -o-transition: all .5s;
+      transition: all .5s;
+      height: 50px;
+      width: 50px;
+      cursor: pointer;
+      opacity: .3;
+      border-radius: 100%;
+      background-color: aquamarine;
+      text-align: center;
+      line-height: 50px;
+      right: 0
+    }
+
+    ._th-container:hover {
+      left: -10px
+    }
+
+    ._th-container {
+      font-size: 12px;
+      -webkit-transition: all .5s;
+      -o-transition: all .5s;
+      transition: all .5s;
+      left: -40px;
+      top: 20%;
+      position: fixed;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      z-index: 100000;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none
+    }
+
+    ._th-container ._th-item:hover {
+      opacity: .8;
+      background-color: #5fb492;
+      color: aliceblue
+    }
+
+    ._th-container ._th-item:active {
+      opacity: .9;
+      background-color: #316347;
+      color: aliceblue
+    }
+
+    ._th-container:hover ._th-click-hover {
+      opacity: .8
+    }
+
+    ._th-container:hover ._th-item {
+      opacity: .6;
+      right: 0
+    }
+
+    ._th-container ._th-click-hover:hover {
+      opacity: .8;
+      background-color: #5fb492;
+      color: aliceblue
+    }
+
+    ._th_cover-all-show-times {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 99999;
+      opacity: 1;
+      font-weight: 900;
+      font-size: 30px;
+      color: #4f4f4f;
+      background-color: rgba(0, 0, 0, 0.1)
+    }
+
+    ._th_cover-all-show-times._th_hidden {
+      z-index: -99999;
+      opacity: 0;
+      -webkit-transition: 1s all;
+      -o-transition: 1s all;
+      transition: 1s all
+    }
+
+    ._th_cover-all-show-times ._th_times {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background-color: rgba(127, 255, 212, 0.51);
+      text-align: center;
+      line-height: 300px;
+      position: absolute;
+      top: 50%;
+      right: 50%;
+      margin-top: -150px;
+      margin-right: -150px;
+    }
+  </style>
+  <script charset="utf-8" src="moz-extension://49b3f6e7-a0ef-4149-848c-2f4b4acfee55/js/btype.js"></script>
+  <script type="text/javascript" charset="utf-8"
+    src="moz-extension://49b3f6e7-a0ef-4149-848c-2f4b4acfee55/js/gwdang-notifier-ff.js"></script>
+</head>
+
+<body class="color-theme-blue push-content-right theme-light ">
+  <div class="wrapper">
+    <div class="sidebar sidebar-left" id="leftmenuarea">
+      <div class="profile-link"><a href="#" class="media">
+          <div class="w-auto h-100">
+            <figure class="avatar avatar-40"><i class="la la-user" style="font-size:40px"></i></figure>
+          </div>
+          <div class="media-body">
+            <h5 class=" mb-0">测试中 <span class="status-online bg-success"></span></h5>
+            <p>student</p>
+          </div>
+        </a></div>
+      <nav class="navbar">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a href="http://htu.banjimofang.com/student/courses"> 首页</a></li>
+          <li class="nav-item"><a href="http://htu.banjimofang.com/student/detail"> 个人资料</a></li>
+          <li class="nav-item"><a href="http://htu.banjimofang.com/student/account?from=menu"> 账户设置/解绑</a></li>
+          <li class="nav-item"><a href="http://htu.banjimofang.com/clearcache.php?ref=/student"> 清空登录缓存</a></li>
+          <li class="nav-item"><a href="http://htu.banjimofang.com/student/password"> 修改密码</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="page" style="position: absolute;overflow-y: auto">
+      <div id="content">
+        <header class="row m-0 fixed-header">
+          <div class="left"><a href="http://htu.banjimofang.com/student/course/31030"><i class="la la-arrow-left"></i></a></div>
+          <div class="col center"><a href="javascript:void(0);" class="logo">请假</a></div>
+        </header>
+        <div class="page-content">
+          <div style="padding: 0px 15px;">
+            <div class="weui-cells__title">
+              <div class="mh--15"><a href="http://htu.banjimofang.com/student/course/31030/leaves/add"
+                  class="btn btn-link btn-block mb-30 btn-lg bg-white"><i class="la la-plus"></i> 新建请假申请
+                </a></div> <strong>测试中 (测试中)</strong> 提交的请假申请
+            </div>
+            <div class="weui-cells weui-cells_separated weui-cells_rounded mb-20"><a
+                href="index.html" class="weui-cell weui-cell_access">
+                <div class="weui-cell__bd">
+                  <div class="weui-cell__bd__hd">事假</div>
+                  <div class="weui-cell__bd__bd">请假原因: 测试中</div>
+                  <div class="weui-cell__bd__bd" id = "autoo"></div>
+                  <script>
+                    var date = new Date();
+                    var y = date.getFullYear();
+                    var m = date.getMonth() + 1;
+                    var d = date.getDate();
+                    var D = d - 1;
+                    var DD = d + 1;
+                    document.getElementById("autoo").innerHTML = "请假时间：" + y + "-" + m + "-" + D + " 10:30 ~ " + y + "-" + m + "-" + DD + " 17:30";
+                </script>
+                  <div class="weui-cell__bd__bd" id="applytime"></div>
+                  <script>
+                    var date = new Date()
+                    var y = date.getFullYear();
+                    var m = date.getMonth() + 1;
+                    var d = date.getDate();
+                    var D1 = d - 1;
+                    document.getElementById("applytime").innerHTML = "申请时间: " + y + "年" + m + "月" + D1 + "日 9:22";
+                </script>
+                  <p class="weui-cell__bd__bd">测试中</p>
+                  <div class="weui-cell__bd__bd_status"><span class="green">通过上级审核</span>
+                    <!----> <span class="text-primary pull-right link">出示假条</span>
+                  </div>
+                </div>
+                <div class="weui-cell__ft"></div>
+              </a><a href="http://htu.banjimofang.com/student/course/31030/leaves/1210567" class="weui-cell weui-cell_access">
+                <div class="weui-cell__bd">
+                  <div class="weui-cell__bd__hd">事假</div>
+                  <div class="weui-cell__bd__bd">请假原因: 测试中</div>
+                  <div class="weui-cell__bd__bd">请假时间: 2021-10-13 07 ~ 2021-10-17 20</div>
+                  <div class="weui-cell__bd__bd">申请时间: 2021年10月08日 13:19</div>
+                  <p class="weui-cell__bd__bd">测试中</p>
+                  <div class="weui-cell__bd__bd_status"><span class="green">已销假</span>
+                    <!---->
+                    <!---->
+                  </div>
+                </div>
+                <div class="weui-cell__ft"></div>
+              </a>
+              <!---->
+            </div>
+            <!---->
+            <!---->
+            <!---->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./jscss/bootstrap.bundle.min.js"></script>
+  <script src="./jscss/main.js"></script>
+  <script src="./jscss/lodash.min.js"></script>
+
+  <script src="./jscss/vue.min.js"></script>
+
+  <script src="./jscss/uuid.min.js"></script>
+  <script src="./jscss/linq.min.js"></script>
+  <script src="./jscss/vuelidate.min.js"></script>
+  <script src="./jscss/validators.min.js"></script>
+
+  <script>
+    var mixins = [];
+
+    var defaultMixin = {
+      methods: {
+        onLoad: function () { }
+      },
+      mounted: function () {
+        $('.vue-loading').removeClass('vue-loading');
+      }
+    }
+    mixins.push(defaultMixin)
+  </script>
+
+  <script>
+    var statusMixin = {
+      methods: {
+        rowStatusClass: function (status) {
+          if (status === '已过期') {
+            return 'inactive'
+          }
+          return ''
+        },
+
+        statusClass: function (status) {
+          if (!status) {
+            return ''
+          }
+          if (status === '尚未开始' || status.startsWith('等待')) {
+            return 'orange'
+          } else if (status === '已撤销') {
+            return 'silver'
+          } else if (status === '被退回' || status.indexOf('销假中') >= 0) {
+            return 'red'
+          } else if (status.startsWith('通过') || status.indexOf('审核完成') >= 0 || status === '已销假') {
+            return 'green'
+          }
+          return ''
+        }
+      }
+    }
+    mixins && mixins.push(statusMixin)
+  </script>
+  <script>
+    var itemMixin = {
+      data: {
+        hasMore: true
+      },
+      methods: {
+        onLoad: function () {
+          if (this.items.length < 10) {
+            this.hasMore = false;
+          }
+        },
+        reloadMore: function (cb) {
+          this.hasMore = false
+          return this.reload(cb, {
+            more: true
+          });
+        },
+        reviewed: function (item) {
+          if ('green' !== this.statusClass(item.process)) {
+            return false;
+          }
+          return item.process !== '已销假';
+        },
+        viewPassCard: function (item) {
+          location.href = 'index.html';
+        },
+        timeRange: function (data) {
+          return timeStr(data.fn_907) + ' ~ ' + timeStr(data.fn_2379)
+        }
+      }
+    };
+  </script>
+
+  <script>
+    if (window.itemMixin) {
+      mixins.push(window.itemMixin)
+    }
+
+    var app = new Vue({
+      el: '#content',
+      mixins: mixins,
+      data: {
+        loading: true,
+        items: [],
+        temps: {}
+      },
+      computed: {
+        presets: function () {
+          return _.filter(this.items, function (item) {
+            return item.student_id === 0
+          })
+        },
+        owns: function () {
+          return _.filter(this.items, function (item) {
+            return item.student_id !== 0
+          })
+        }
+      },
+      methods: {
+        reload: function (cb, data) {
+          this.loading = true
+          exam.request('', function (resp) {
+          }.bind(this), 'get', data);
+        }
+      },
+      mounted: function () {
+        $(function () {
+          this.reload();
+        }.bind(this));
+      }
+    });
+  </script>
+
+  <div>
+    <div class="_th-container">
+      <div class="_th-click-hover _item-input" onclick="changeTime()">
+        x1
+      </div>
+      <div class="_th-item _item-x2">&gt;</div>
+      <div class="_th-item _item-x-2">&lt;</div>
+      <div class="_th-item _item-x4">&gt;&gt;</div>
+      <div class="_th-item _item-x-4">&lt;&lt;</div>
+      <div class="_th-item _item-reset">O</div>
+    </div>
+    <div class="_th_cover-all-show-times _th_hidden">
+      <div class="_th_times">x1</div>
+    </div>
+  </div>
+  <div class="weui-loading_toast " style="display: none;">
+    <div class="weui-mask_transparent"></div>
+    <div class="weui-toast weui-animate-fade-in"> <i class="weui-loading weui-icon_toast"></i>
+      <p class="weui-toast__content">加载中...</p>
+    </div>
+  </div>
+</body>
+
+</html>

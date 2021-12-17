@@ -1,0 +1,212 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no, viewport-fit=cover">
+    <link href="https://res.wx.qq.com/open/libs/weui/2.1.4/weui.min.css" rel="stylesheet">
+    <link href="https://cdn.banjimofang.com/res/bootstrap-4.6.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.banjimofang.com/m2019/css/style.css?v=1635422101" rel="stylesheet">
+    <link href="https://cdn.banjimofang.com/res/line-awesome_1_3/css/line-awesome-nob.min.css" rel="stylesheet">
+    <script>var gconfig = { role: 'student', type: 'fdy', cname: '院系', uname: '庞栋' }; var COURSE_ID = 31030;</script>
+    <script src="https://cdn.banjimofang.com/js/jquery-1.12.4.min.js"></script>
+    <script src="https://res.wx.qq.com/open/libs/weuijs/1.2.1/weui.min.js"></script>
+    <script src="https://cdn.banjimofang.com/res/app.js?v=1635422101"></script>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <link rel="stylesheet" href="https://cdn.banjimofang.com/css/helper.css?v=1635422101">
+    <link rel="stylesheet" href="https://cdn.banjimofang.com/css/main_vue.css?v=1635422101">
+	<style>
+        .fixed-header, .fixed-header + header.row.m-0, .e-bg-primary { background:#009688 !important; }
+        .border-primary, .e-border-primary { border-color: #009688 !important; }
+        .e-primary { color: #009688 !important; }
+        @media (max-width: 800px) { .layui-header { background:#009688 !important; } }
+    </style>
+    <title>师大移动学工用户中心</title>
+</head>
+
+<body class="color-theme-blue push-content-right theme-light">
+    <div class="wrapper">
+        <div class="sidebar sidebar-left" id="leftmenuarea"></div>
+        <div class="page vue-loading" style="position: absolute;overflow-y: auto">
+            <div id="content">
+                <header class="row m-0 fixed-header">
+                    <div class="left">
+                        <a href="javascript:" onclick="history.back()"><i class="la la-arrow-left"></i></a>
+                    </div>
+                    <div class="col center">
+                        <a href="javascript:void(0);" class="logo">
+                            出示假条
+                        </a>
+                    </div>
+                </header>
+                <div class="page-content">
+                    <div style="padding:0 15px;">
+                        <div class="card mt-15">
+                            <div class="card-body">
+                                <div class="card-text relative text-dark">
+                                    <p class="h2 text-center text-dark font-weight-light">
+                                        返校卡
+                                    </p>
+
+                                    <img id="approved_icon"
+                                        src="http://cdn.banjimofang.com/res/img/return_school.png" alt="">
+
+                                    <div class="row mt-30 mb-20">
+                                        <div class="col d-flex flex-column justify-content-center align-items-center">
+                                            <figure class="figure mb-0">
+                                                <img class="figure-img img-fluid rounded" src="1.jpg" alt="">
+                                            </figure>
+                                        </div>
+                                        <div class="col d-flex flex-column justify-content-center pl-0">
+                                            <p class="h5 mb-15 mt-5 text-dark"><span class="h6">姓名：</span>测试中</p>
+                                            <p class="h6 mb-10 font-weight-normal">性别：测试中</p>
+                                            <p class="h6 mb-10 font-weight-normal">院系：测试中</p>
+                                            <p class="h6 mb-10 font-weight-normal">学号：测试中</p>
+                                        </div>
+                                    </div>
+                                    <p class="h6 font-weight-normal">请假时间</p>
+                                    <table class="table time-table text-center">
+                                        <tr>
+                                            <th>起</th>
+                                            <td>
+                                                <p class="h3 font-weight-light text-dark" id="ymd"></p>
+                                                <script>
+                                                    var date = new Date();
+                                                    var y = date.getFullYear();
+                                                    var m = date.getMonth() + 1;
+                                                    var d = date.getDate();
+                                                    var D = d - 1;
+                                                    document.getElementById("ymd").innerHTML = y + "-" + m + "-" + D + " 上午";
+                                                </script>
+                                                <script type="text/javascript" src="dtxt1.js"></script>
+                                            </td>
+                                            <th><span class="invisible">起</span></th>
+                                        </tr>
+                                        <tr>
+                                            <th>至</th>
+                                            <td>
+                                                <p class="h3 font-weight-light text-dark" id="xmd"></p>
+                                                <script>
+                                                    var date = new Date();
+                                                    var y = date.getFullYear();
+                                                    var m = date.getMonth() + 1;
+                                                    var d = date.getDate();
+                                                    var D1 = d + 1;
+                                                    document.getElementById("xmd").innerHTML = y + "-" + m + "-" + D1 + " 下午";
+                                                </script>
+
+                                            </td>
+                                            <th><span class="invisible">至</span></th>
+                                        </tr>
+                                    </table>
+
+                                    <div class="text-center text-danger mt-20 mb--10 font-24">离校不离市</div>
+
+                                    <div class="text-center">
+                                        <table class="table bottom-table table-sm table-borderless mt-30">
+                                            <tr>
+                                                <th>审批人：</th>
+                                                <td class="text-dark">测试中</td>
+                                            </tr>
+                                            <tr>
+                                                <th>批准时间：</th>
+                                                <td class="text-dark" id="imd"></td>
+                                                <script>
+                                                    var date = new Date()
+                                                    var y = date.getFullYear();
+                                                    var m = date.getMonth() + 1;
+                                                    var d = date.getDate();
+                                                    var D1 = d - 1;
+                                                    document.getElementById("imd").innerHTML = y + "-" + m + "-" + D1 + " 10:32";
+                                                </script>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <style>
+                            .time-table th,
+                            .bottom-table th {
+                                font-weight: normal;
+                                color: #666;
+                                text-align: right;
+                                vertical-align: middle;
+                            }
+
+                            .time-table td {
+                                width: 220px;
+                            }
+
+                            .time-table p {
+                                margin-bottom: 0 !important;
+                            }
+
+                            .time-table {
+                                border-bottom: 1px solid #dee2e6;
+                            }
+
+                            .bottom-table {
+                                width: auto;
+                                font-size: 16px;
+                                text-align: left;
+                                margin: 0 auto;
+                            }
+
+                            #approved_icon {
+                                position: absolute;
+                                right: -15px;
+                                top: -15px;
+                                width: 110px;
+                                z-index: 100;
+                                display: none;
+                            }
+
+                            @keyframes stamp {
+                                from {
+                                    right: -90px;
+                                    width: 200px;
+                                    opacity: 0.5;
+                                }
+
+                                to {
+                                    right: -15px;
+                                    width: 110px;
+                                    opacity: 1;
+                                }
+                            }
+                        </style>
+
+                        <script>
+                            $('#approved_icon').css({
+                                animation: '0.3s ease-in stamp'
+                            }).show();
+
+                            function backToSchool() {
+                                weui.confirm('是否出示返校卡？出示后无法撤销返校状态！', function () {
+                                    location.href = '/student/course/31030/leaves/334839/pass-card-return';
+                                });
+                            }
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.banjimofang.com/res/bootstrap-4.6.0/js/bootstrap.bundle.min.js?1"></script>
+    <script src="https://cdn.banjimofang.com/m2019/js/main.js?20210901"></script>
+    <script src="https://cdn.banjimofang.com/js/lodash.min.js"></script>
+
+    <script src="https://cdn.banjimofang.com/js/vue.min.js"></script>
+
+    <script src="https://cdn.banjimofang.com/js/uuid.min.js?v=8.3.2"></script>
+    <script src="https://cdn.banjimofang.com/js/linq.min.js"></script>
+    <script src="https://cdn.banjimofang.com/js/vuelidate/vuelidate.min.js"></script>
+    <script src="https://cdn.banjimofang.com/js/vuelidate/validators.min.js"></script>
+    <script src="https://cdn.banjimofang.com/js/main_vue_4m2019.js?v=1635422101"></script>
+
+</body>
+
+</html>
