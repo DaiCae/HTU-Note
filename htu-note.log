@@ -1,0 +1,782 @@
+[2021-12-30 06:23:57 +0000] [112037] [INFO] Starting gunicorn 20.1.0
+[2021-12-30 06:23:57 +0000] [112037] [INFO] Listening at: http://0.0.0.0:8000 (112037)
+[2021-12-30 06:23:57 +0000] [112037] [INFO] Using worker: sync
+[2021-12-30 06:23:57 +0000] [112039] [INFO] Booting worker with pid: 112039
+[2021-12-30 06:23:57 +0000] [112040] [INFO] Booting worker with pid: 112040
+2021-12-30 06:23:58,305 INFO sqlalchemy.engine.Engine SHOW VARIABLES LIKE 'sql_mode'
+2021-12-30 06:23:58,305 INFO sqlalchemy.engine.Engine [raw sql] {}
+2021-12-30 06:23:58,338 INFO sqlalchemy.engine.Engine SHOW VARIABLES LIKE 'lower_case_table_names'
+2021-12-30 06:23:58,338 INFO sqlalchemy.engine.Engine [generated in 0.00016s] {}
+2021-12-30 06:23:58,340 INFO sqlalchemy.engine.Engine SHOW VARIABLES LIKE 'sql_mode'
+2021-12-30 06:23:58,340 INFO sqlalchemy.engine.Engine [raw sql] {}
+2021-12-30 06:23:58,373 INFO sqlalchemy.engine.Engine SHOW VARIABLES LIKE 'lower_case_table_names'
+2021-12-30 06:23:58,373 INFO sqlalchemy.engine.Engine [generated in 0.00015s] {}
+2021-12-30 06:23:58,401 INFO sqlalchemy.engine.Engine SELECT DATABASE()
+2021-12-30 06:23:58,401 INFO sqlalchemy.engine.Engine [raw sql] {}
+2021-12-30 06:23:58,436 INFO sqlalchemy.engine.Engine SELECT DATABASE()
+2021-12-30 06:23:58,436 INFO sqlalchemy.engine.Engine [raw sql] {}
+2021-12-30 06:23:58,493 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:23:58,494 INFO sqlalchemy.engine.Engine SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = %(table_schema)s AND table_name = %(table_name)s
+2021-12-30 06:23:58,494 INFO sqlalchemy.engine.Engine [generated in 0.00012s] {'table_schema': 'HTU', 'table_name': 'note_student'}
+2021-12-30 06:23:58,524 INFO sqlalchemy.engine.Engine SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = %(table_schema)s AND table_name = %(table_name)s
+2021-12-30 06:23:58,525 INFO sqlalchemy.engine.Engine [cached since 0.03099s ago] {'table_schema': 'HTU', 'table_name': 'note_log'}
+2021-12-30 06:23:58,527 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:23:58,527 INFO sqlalchemy.engine.Engine SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = %(table_schema)s AND table_name = %(table_name)s
+2021-12-30 06:23:58,527 INFO sqlalchemy.engine.Engine [generated in 0.00012s] {'table_schema': 'HTU', 'table_name': 'note_student'}
+2021-12-30 06:23:58,555 INFO sqlalchemy.engine.Engine COMMIT
+2021-12-30 06:23:58,558 INFO sqlalchemy.engine.Engine SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = %(table_schema)s AND table_name = %(table_name)s
+2021-12-30 06:23:58,558 INFO sqlalchemy.engine.Engine [cached since 0.031s ago] {'table_schema': 'HTU', 'table_name': 'note_log'}
+2021-12-30 06:23:58,589 INFO sqlalchemy.engine.Engine COMMIT
+2021-12-30 06:24:40,832 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:24:40,843 INFO sqlalchemy.engine.Engine INSERT INTO note_student (id, name, sex, depart, teacher, pic) VALUES (%(id)s, %(name)s, %(sex)s, %(depart)s, %(teacher)s, %(pic)s)
+2021-12-30 06:24:40,843 INFO sqlalchemy.engine.Engine [generated in 0.00020s] {'id': '1928524069', 'name': '李靓', 'sex': '男', 'depart': '软件学院 2019级', 'teacher': '孙萌倩', 'pic': 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gIoSUNDX1BST0ZJTEUAAQEAAAIYAAAAAAIQAABtbnRyUkdCIFhZWiAAAAAAAAAAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAA ... (5741 characters truncated) ... qDHGB21NoFDUUpx341o4sU4p6yZuXLea3dvyBJsNJDR0twVS4JxKD8OdXiCKGGF4kChWA4GvaCNZbXPAw91ZGA1wiy1tZSfyHjRkgAVL+VZB8RqpmszvK7qcBmJH66srexkoYWJ/l1MCjA0+hH//Z'}
+2021-12-30 06:24:40,875 INFO sqlalchemy.engine.Engine COMMIT
+1928524069
+2021-12-30 06:25:26,934 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:25:26,936 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 06:25:26,936 INFO sqlalchemy.engine.Engine [generated in 0.00013s] {'pk_1': '1928524069'}
+2021-12-30
+2021-12-29
+2021-12-30 06:25:26,972 INFO sqlalchemy.engine.Engine ROLLBACK
+[2021-12-30 06:25:30 +0000] [112037] [CRITICAL] WORKER TIMEOUT (pid:112040)
+[2021-12-30 06:25:30 +0000] [112040] [INFO] Worker exiting (pid: 112040)
+[2021-12-30 06:25:30 +0000] [112143] [INFO] Booting worker with pid: 112143
+2021-12-30 06:25:30,623 INFO sqlalchemy.engine.Engine SHOW VARIABLES LIKE 'sql_mode'
+2021-12-30 06:25:30,623 INFO sqlalchemy.engine.Engine [raw sql] {}
+2021-12-30 06:25:30,656 INFO sqlalchemy.engine.Engine SHOW VARIABLES LIKE 'lower_case_table_names'
+2021-12-30 06:25:30,656 INFO sqlalchemy.engine.Engine [generated in 0.00010s] {}
+2021-12-30 06:25:30,720 INFO sqlalchemy.engine.Engine SELECT DATABASE()
+2021-12-30 06:25:30,720 INFO sqlalchemy.engine.Engine [raw sql] {}
+2021-12-30 06:25:30,813 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:25:30,814 INFO sqlalchemy.engine.Engine SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = %(table_schema)s AND table_name = %(table_name)s
+2021-12-30 06:25:30,814 INFO sqlalchemy.engine.Engine [generated in 0.00012s] {'table_schema': 'HTU', 'table_name': 'note_student'}
+2021-12-30 06:25:30,845 INFO sqlalchemy.engine.Engine SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = %(table_schema)s AND table_name = %(table_name)s
+2021-12-30 06:25:30,846 INFO sqlalchemy.engine.Engine [cached since 0.03168s ago] {'table_schema': 'HTU', 'table_name': 'note_log'}
+2021-12-30 06:25:30,877 INFO sqlalchemy.engine.Engine COMMIT
+1928524069
+2021-12-30 06:26:22,430 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:26:22,432 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 06:26:22,432 INFO sqlalchemy.engine.Engine [generated in 0.00019s] {'pk_1': '1928524069'}
+2021-12-30
+2021-12-29
+2021-12-30 06:26:22,471 INFO sqlalchemy.engine.Engine ROLLBACK
+2021-12-30 06:27:41,918 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:27:41,919 INFO sqlalchemy.engine.Engine INSERT INTO note_student (id, name, sex, depart, teacher, pic) VALUES (%(id)s, %(name)s, %(sex)s, %(depart)s, %(teacher)s, %(pic)s)
+2021-12-30 06:27:41,919 INFO sqlalchemy.engine.Engine [cached since 181.1s ago] {'id': '1928524079', 'name': '张世纪', 'sex': '男', 'depart': '软件学院 2019级', 'teacher': '孙萌倩', 'pic': 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gIoSUNDX1BST0ZJTEUAAQEAAAIYAAAAAAQwAABtbnRyUkdCIFhZWiAAAAAAAAAAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAA ... (6873 characters truncated) ... BFNVugMqmSFOvDl7OLOzZlnuxvYWxlrWY6yxbupgTb/dI/DCxzfmIgj5R5+DLf/zhToHHYJMeUxm9G1eak+pUdy3tXFsRveK6n7sVJzMladFlzb/9NA/ux+/SOtf6cf8AsT+GOiFwXHZLHGyCv//Z'}
+2021-12-30 06:27:41,950 INFO sqlalchemy.engine.Engine COMMIT
+1928524069
+2021-12-30 06:27:45,253 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:27:45,253 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 06:27:45,253 INFO sqlalchemy.engine.Engine [cached since 138.3s ago] {'pk_1': '1928524069'}
+2021-12-30
+2021-12-29
+2021-12-30 06:27:45,315 INFO sqlalchemy.engine.Engine ROLLBACK
+1928524079
+2021-12-30 06:28:12,179 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:28:12,179 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 06:28:12,179 INFO sqlalchemy.engine.Engine [cached since 109.7s ago] {'pk_1': '1928524079'}
+2021-12-30
+2021-12-29
+2021-12-30 06:28:12,212 INFO sqlalchemy.engine.Engine ROLLBACK
+***REMOVED***
+2021-12-30 06:29:38,721 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:29:38,721 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 06:29:38,721 INFO sqlalchemy.engine.Engine [cached since 196.3s ago] {'pk_1': '***REMOVED***'}
+2021-12-30
+2021-12-29
+2021-12-30 06:29:38,754 INFO sqlalchemy.engine.Engine ROLLBACK
+***REMOVED***
+2021-12-30 06:29:59,415 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:29:59,415 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 06:29:59,415 INFO sqlalchemy.engine.Engine [cached since 217s ago] {'pk_1': '***REMOVED***'}
+2021-12-30
+2021-12-29
+2021-12-30 06:29:59,448 INFO sqlalchemy.engine.Engine ROLLBACK
+1928524069
+2021-12-30 06:30:18,413 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:30:18,413 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 06:30:18,413 INFO sqlalchemy.engine.Engine [cached since 236s ago] {'pk_1': '1928524069'}
+2021-12-30
+2021-12-29
+2021-12-30 06:30:18,446 INFO sqlalchemy.engine.Engine ROLLBACK
+1928524079
+2021-12-30 06:30:24,920 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:30:24,920 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 06:30:24,920 INFO sqlalchemy.engine.Engine [cached since 242.5s ago] {'pk_1': '1928524079'}
+2021-12-30
+2021-12-29
+2021-12-30 06:30:24,953 INFO sqlalchemy.engine.Engine ROLLBACK
+1928524069
+2021-12-30 06:31:03,923 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:31:03,923 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 06:31:03,923 INFO sqlalchemy.engine.Engine [cached since 281.5s ago] {'pk_1': '1928524069'}
+2021-12-30
+2021-12-29
+2021-12-30 06:31:03,978 INFO sqlalchemy.engine.Engine ROLLBACK
+1928524
+2021-12-30 06:31:25,480 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:31:25,480 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 06:31:25,480 INFO sqlalchemy.engine.Engine [cached since 303s ago] {'pk_1': '1928524'}
+2021-12-30 06:31:25,512 INFO sqlalchemy.engine.Engine ROLLBACK
+19285240
+2021-12-30 06:31:48,190 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:31:48,191 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 06:31:48,191 INFO sqlalchemy.engine.Engine [cached since 325.8s ago] {'pk_1': '19285240'}
+2021-12-30 06:31:48,223 INFO sqlalchemy.engine.Engine ROLLBACK
+1928524079
+2021-12-30 06:32:15,625 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:32:15,626 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 06:32:15,626 INFO sqlalchemy.engine.Engine [cached since 353.2s ago] {'pk_1': '1928524079'}
+2021-12-30
+2021-12-29
+2021-12-30 06:32:15,658 INFO sqlalchemy.engine.Engine ROLLBACK
+192852407
+2021-12-30 06:32:46,191 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:32:46,191 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 06:32:46,191 INFO sqlalchemy.engine.Engine [cached since 383.8s ago] {'pk_1': '192852407'}
+2021-12-30 06:32:46,224 INFO sqlalchemy.engine.Engine ROLLBACK
+1928524079
+2021-12-30 06:33:22,839 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:33:22,839 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 06:33:22,839 INFO sqlalchemy.engine.Engine [cached since 475.9s ago] {'pk_1': '1928524079'}
+2021-12-30
+2021-12-29
+2021-12-30 06:33:22,871 INFO sqlalchemy.engine.Engine ROLLBACK
+1928524069
+2021-12-30 06:33:33,423 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:33:33,424 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 06:33:33,424 INFO sqlalchemy.engine.Engine [cached since 431s ago] {'pk_1': '1928524069'}
+2021-12-30
+2021-12-29
+2021-12-30 06:33:33,456 INFO sqlalchemy.engine.Engine ROLLBACK
+1928524069
+2021-12-30 06:33:42,344 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:33:42,344 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 06:33:42,344 INFO sqlalchemy.engine.Engine [cached since 439.9s ago] {'pk_1': '1928524069'}
+2021-12-30
+2021-12-29
+2021-12-30 06:33:42,376 INFO sqlalchemy.engine.Engine ROLLBACK
+1928524079
+2021-12-30 06:34:01,919 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:34:01,919 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 06:34:01,919 INFO sqlalchemy.engine.Engine [cached since 459.5s ago] {'pk_1': '1928524079'}
+2021-12-30
+2021-12-29
+2021-12-30 06:34:01,951 INFO sqlalchemy.engine.Engine ROLLBACK
+2021-12-30 06:34:14,046 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:34:14,047 INFO sqlalchemy.engine.Engine INSERT INTO note_student (id, name, sex, depart, teacher, pic) VALUES (%(id)s, %(name)s, %(sex)s, %(depart)s, %(teacher)s, %(pic)s)
+2021-12-30 06:34:14,047 INFO sqlalchemy.engine.Engine [generated in 0.00013s] {'id': '1928524033', 'name': '曾运洪', 'sex': '男', 'depart': '软件学院 2019级', 'teacher': '祁菲', 'pic': 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/2wBDAQ ... (4489 characters truncated) ... WmXXFpK0kIB70QIMNmEz5TKQD0zVRWkNpTyjGaWJxnHz/AMv/AHUSUexfySZRUU7HrV0O8ucjNeCSetWpqdgGRzkdSD7UmXBk7d68BRFJqWrJ3HX0qy0rPa1jc1hlwZO3elVZOVE70kUAnO9Qh//Z'}
+2021-12-30 06:34:14,078 INFO sqlalchemy.engine.Engine COMMIT
+***REMOVED***
+2021-12-30 06:34:35,246 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:34:35,247 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 06:34:35,247 INFO sqlalchemy.engine.Engine [cached since 548.3s ago] {'pk_1': '***REMOVED***'}
+2021-12-30
+2021-12-29
+2021-12-30 06:34:35,279 INFO sqlalchemy.engine.Engine ROLLBACK
+1928524033
+2021-12-30 06:34:38,725 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:34:38,726 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 06:34:38,726 INFO sqlalchemy.engine.Engine [cached since 496.3s ago] {'pk_1': '1928524033'}
+2021-12-30
+2021-12-29
+2021-12-30 06:34:38,758 INFO sqlalchemy.engine.Engine ROLLBACK
+
+2021-12-30 06:36:56,096 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:36:56,096 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 06:36:56,097 INFO sqlalchemy.engine.Engine [cached since 633.7s ago] {'pk_1': ''}
+2021-12-30 06:36:56,129 INFO sqlalchemy.engine.Engine ROLLBACK
+[2021-12-30 06:36:59 +0000] [112037] [CRITICAL] WORKER TIMEOUT (pid:112039)
+[2021-12-30 06:36:59 +0000] [112039] [INFO] Worker exiting (pid: 112039)
+[2021-12-30 06:36:59 +0000] [112567] [INFO] Booting worker with pid: 112567
+2021-12-30 06:36:59,765 INFO sqlalchemy.engine.Engine SHOW VARIABLES LIKE 'sql_mode'
+2021-12-30 06:36:59,765 INFO sqlalchemy.engine.Engine [raw sql] {}
+2021-12-30 06:36:59,795 INFO sqlalchemy.engine.Engine SHOW VARIABLES LIKE 'lower_case_table_names'
+2021-12-30 06:36:59,795 INFO sqlalchemy.engine.Engine [generated in 0.00011s] {}
+2021-12-30 06:36:59,851 INFO sqlalchemy.engine.Engine SELECT DATABASE()
+2021-12-30 06:36:59,851 INFO sqlalchemy.engine.Engine [raw sql] {}
+2021-12-30 06:36:59,932 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:36:59,932 INFO sqlalchemy.engine.Engine SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = %(table_schema)s AND table_name = %(table_name)s
+2021-12-30 06:36:59,932 INFO sqlalchemy.engine.Engine [generated in 0.00012s] {'table_schema': 'HTU', 'table_name': 'note_student'}
+2021-12-30 06:36:59,960 INFO sqlalchemy.engine.Engine SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = %(table_schema)s AND table_name = %(table_name)s
+2021-12-30 06:36:59,960 INFO sqlalchemy.engine.Engine [cached since 0.02761s ago] {'table_schema': 'HTU', 'table_name': 'note_log'}
+2021-12-30 06:36:59,987 INFO sqlalchemy.engine.Engine COMMIT
+2021-12-30 06:37:06,956 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:37:06,956 INFO sqlalchemy.engine.Engine INSERT INTO note_student (id, name, sex, depart, teacher, pic) VALUES (%(id)s, %(name)s, %(sex)s, %(depart)s, %(teacher)s, %(pic)s)
+2021-12-30 06:37:06,956 INFO sqlalchemy.engine.Engine [cached since 172.9s ago] {'id': '1928524033', 'name': '曾运洪', 'sex': '男', 'depart': '软件学院 2019级', 'teacher': '祁菲', 'pic': 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/2wBDAQ ... (4489 characters truncated) ... WmXXFpK0kIB70QIMNmEz5TKQD0zVRWkNpTyjGaWJxnHz/AMv/AHUSUexfySZRUU7HrV0O8ucjNeCSetWpqdgGRzkdSD7UmXBk7d68BRFJqWrJ3HX0qy0rPa1jc1hlwZO3elVZOVE70kUAnO9Qh//Z'}
+2021-12-30 06:37:06,988 INFO sqlalchemy.engine.Engine COMMIT
+1928524033
+2021-12-30 06:37:19,015 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:37:19,016 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 06:37:19,016 INFO sqlalchemy.engine.Engine [generated in 0.00013s] {'pk_1': '1928524033'}
+2021-12-30
+2021-12-29
+2021-12-30 06:37:19,050 INFO sqlalchemy.engine.Engine ROLLBACK
+2021-12-30 06:38:17,866 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:38:17,867 INFO sqlalchemy.engine.Engine INSERT INTO note_student (id, name, sex, depart, teacher, pic) VALUES (%(id)s, %(name)s, %(sex)s, %(depart)s, %(teacher)s, %(pic)s)
+2021-12-30 06:38:17,867 INFO sqlalchemy.engine.Engine [generated in 0.00014s] {'id': '1928524033', 'name': '曾运洪', 'sex': '男', 'depart': '软件学院', 'teacher': '祁菲', 'pic': 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gIoSUNDX1BST0ZJTEUAAQEAAAIYAAAAAAQwAABtbnRyUkdCIFhZWiAAAAAAAAAAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAA ... (5777 characters truncated) ... PrEeaJlsP0+QlsN4QpxPmGHKddEoyNrLX/KecNt1r3uTa1zAI+makCSJki/OyEj90eordUbN0TNv2E/wiDZu7khQsINPmLMEHoTC+tz/KfCB0jEVYQLJnLD/Zp/hCn91Nd/z7/pI/hFvUEjaZ/9k='}
+2021-12-30 06:38:17,895 INFO sqlalchemy.engine.Engine COMMIT
+1928524033
+2021-12-30 06:38:24,181 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:38:24,181 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 06:38:24,181 INFO sqlalchemy.engine.Engine [cached since 65.16s ago] {'pk_1': '1928524033'}
+2021-12-30
+2021-12-29
+2021-12-30 06:38:24,209 INFO sqlalchemy.engine.Engine ROLLBACK
+1928524033
+2021-12-30 06:38:39,556 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:38:39,556 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 06:38:39,556 INFO sqlalchemy.engine.Engine [cached since 80.54s ago] {'pk_1': '1928524033'}
+2021-12-30
+2021-12-29
+2021-12-30 06:38:39,585 INFO sqlalchemy.engine.Engine ROLLBACK
+1928524079
+2021-12-30 06:40:48,419 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:40:48,419 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 06:40:48,419 INFO sqlalchemy.engine.Engine [cached since 866s ago] {'pk_1': '1928524079'}
+2021-12-30
+2021-12-29
+2021-12-30 06:40:48,452 INFO sqlalchemy.engine.Engine ROLLBACK
+1928524069
+2021-12-30 06:40:54,268 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:40:54,269 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 06:40:54,269 INFO sqlalchemy.engine.Engine [cached since 215.3s ago] {'pk_1': '1928524069'}
+2021-12-30
+2021-12-29
+2021-12-30 06:40:54,297 INFO sqlalchemy.engine.Engine ROLLBACK
+1928524079
+2021-12-30 06:45:03,772 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:45:03,773 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 06:45:03,773 INFO sqlalchemy.engine.Engine [cached since 464.8s ago] {'pk_1': '1928524079'}
+2021-12-30
+2021-12-29
+2021-12-30 06:45:03,801 INFO sqlalchemy.engine.Engine ROLLBACK
+1928524033
+2021-12-30 06:45:13,557 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:45:13,558 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 06:45:13,558 INFO sqlalchemy.engine.Engine [cached since 1131s ago] {'pk_1': '1928524033'}
+2021-12-30
+2021-12-29
+2021-12-30 06:45:13,590 INFO sqlalchemy.engine.Engine ROLLBACK
+1928524079
+2021-12-30 06:46:00,258 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:46:00,259 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 06:46:00,259 INFO sqlalchemy.engine.Engine [cached since 521.2s ago] {'pk_1': '1928524079'}
+2021-12-30
+2021-12-29
+2021-12-30 06:46:00,287 INFO sqlalchemy.engine.Engine ROLLBACK
+1928524033
+2021-12-30 06:46:03,368 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:46:03,368 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 06:46:03,368 INFO sqlalchemy.engine.Engine [cached since 1181s ago] {'pk_1': '1928524033'}
+2021-12-30
+2021-12-29
+2021-12-30 06:46:03,400 INFO sqlalchemy.engine.Engine ROLLBACK
+1928524033
+2021-12-30 06:46:29,595 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 06:46:29,595 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 06:46:29,596 INFO sqlalchemy.engine.Engine [cached since 550.6s ago] {'pk_1': '1928524033'}
+2021-12-30
+2021-12-29
+2021-12-30 06:46:29,624 INFO sqlalchemy.engine.Engine ROLLBACK
+1928524069
+2021-12-30 07:50:47,155 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 07:50:47,155 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 07:50:47,155 INFO sqlalchemy.engine.Engine [cached since 4408s ago] {'pk_1': '1928524069'}
+[2021-12-30 07:50:47,155] ERROR in app: Exception on /today [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/base.py", line 1802, in _execute_context
+    self.dialect.do_execute(
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/connections.py", line 775, in _read_query_result
+    result.read()
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/connections.py", line 692, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/connections.py", line 748, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1518, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1516, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1502, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/root/HTU-Note/app.py", line 112, in note_today
+    stu = Student.query.get(id)
+  File "<string>", line 2, in get
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/util/deprecations.py", line 401, in warned
+    return fn(*args, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/orm/query.py", line 943, in get
+    return self._get_impl(ident, loading.load_on_pk_identity)
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/orm/query.py", line 947, in _get_impl
+    return self.session._get_impl(
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/orm/session.py", line 2892, in _get_impl
+    return db_load_fn(
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/orm/loading.py", line 530, in load_on_pk_identity
+    session.execute(
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/orm/session.py", line 1692, in execute
+    result = conn._execute_20(statement, params or {}, execution_options)
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/base.py", line 1614, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/sql/elements.py", line 325, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/base.py", line 1481, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/base.py", line 1845, in _execute_context
+    self._handle_dbapi_exception(
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/base.py", line 2026, in _handle_dbapi_exception
+    util.raise_(
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/util/compat.py", line 207, in raise_
+    raise exception
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/base.py", line 1802, in _execute_context
+    self.dialect.do_execute(
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/connections.py", line 775, in _read_query_result
+    result.read()
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/connections.py", line 692, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/connections.py", line 748, in _read_bytes
+    raise err.OperationalError(
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query')
+[SQL: SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s]
+[parameters: {'pk_1': '1928524069'}]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+1928524079
+2021-12-30 08:02:10,105 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 08:02:10,105 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 08:02:10,105 INFO sqlalchemy.engine.Engine [cached since 5748s ago] {'pk_1': '1928524079'}
+[2021-12-30 08:02:10,106] ERROR in app: Exception on /today [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/base.py", line 1802, in _execute_context
+    self.dialect.do_execute(
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/connections.py", line 775, in _read_query_result
+    result.read()
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/connections.py", line 692, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/connections.py", line 748, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1518, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1516, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1502, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/root/HTU-Note/app.py", line 112, in note_today
+    stu = Student.query.get(id)
+  File "<string>", line 2, in get
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/util/deprecations.py", line 401, in warned
+    return fn(*args, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/orm/query.py", line 943, in get
+    return self._get_impl(ident, loading.load_on_pk_identity)
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/orm/query.py", line 947, in _get_impl
+    return self.session._get_impl(
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/orm/session.py", line 2892, in _get_impl
+    return db_load_fn(
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/orm/loading.py", line 530, in load_on_pk_identity
+    session.execute(
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/orm/session.py", line 1692, in execute
+    result = conn._execute_20(statement, params or {}, execution_options)
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/base.py", line 1614, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/sql/elements.py", line 325, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/base.py", line 1481, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/base.py", line 1845, in _execute_context
+    self._handle_dbapi_exception(
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/base.py", line 2026, in _handle_dbapi_exception
+    util.raise_(
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/util/compat.py", line 207, in raise_
+    raise exception
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/base.py", line 1802, in _execute_context
+    self.dialect.do_execute(
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/connections.py", line 775, in _read_query_result
+    result.read()
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/connections.py", line 692, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/connections.py", line 748, in _read_bytes
+    raise err.OperationalError(
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query')
+[SQL: SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s]
+[parameters: {'pk_1': '1928524079'}]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+2021-12-30 09:18:39,975 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 09:18:39,976 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 09:18:39,976 INFO sqlalchemy.engine.Engine [cached since 1.034e+04s ago] {'pk_1': '1928524079'}
+2021-12-31
+2021-12-30
+2021-12-30 09:18:40,003 INFO sqlalchemy.engine.Engine ROLLBACK
+***REMOVED***
+2021-12-30 10:12:50,878 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 10:12:50,878 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 10:12:50,879 INFO sqlalchemy.engine.Engine [cached since 1.293e+04s ago] {'pk_1': '***REMOVED***'}
+2021-12-30
+2021-12-29
+2021-12-30 10:12:50,907 INFO sqlalchemy.engine.Engine ROLLBACK
+1928524079
+2021-12-30 10:14:10,184 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 10:14:10,184 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 10:14:10,185 INFO sqlalchemy.engine.Engine [cached since 1.367e+04s ago] {'pk_1': '1928524079'}
+2021-12-30
+2021-12-29
+2021-12-30 10:14:10,213 INFO sqlalchemy.engine.Engine ROLLBACK
+1928524033
+2021-12-30 10:20:09,608 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 10:20:09,608 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 10:20:09,608 INFO sqlalchemy.engine.Engine [cached since 1.403e+04s ago] {'pk_1': '1928524033'}
+2021-12-30
+2021-12-29
+2021-12-30 10:20:09,636 INFO sqlalchemy.engine.Engine ROLLBACK
+1928524033
+2021-12-30 10:26:09,299 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 10:26:09,299 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 10:26:09,299 INFO sqlalchemy.engine.Engine [cached since 1.373e+04s ago] {'pk_1': '1928524033'}
+2021-12-30
+2021-12-29
+2021-12-30 10:26:09,369 INFO sqlalchemy.engine.Engine ROLLBACK
+1928524033
+2021-12-30 10:26:27,609 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 10:26:27,609 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 10:26:27,609 INFO sqlalchemy.engine.Engine [cached since 1.441e+04s ago] {'pk_1': '1928524033'}
+2021-12-30
+2021-12-29
+2021-12-30 10:26:27,637 INFO sqlalchemy.engine.Engine ROLLBACK
+1928524033
+2021-12-30 10:34:19,325 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 10:34:19,325 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 10:34:19,325 INFO sqlalchemy.engine.Engine [cached since 1.422e+04s ago] {'pk_1': '1928524033'}
+2021-12-30
+2021-12-29
+2021-12-30 10:34:19,354 INFO sqlalchemy.engine.Engine ROLLBACK
+1928524069
+2021-12-30 10:51:06,174 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 10:51:06,174 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 10:51:06,174 INFO sqlalchemy.engine.Engine [cached since 1.588e+04s ago] {'pk_1': '1928524069'}
+2021-12-30
+2021-12-29
+2021-12-30 10:51:06,202 INFO sqlalchemy.engine.Engine ROLLBACK
+2021-12-30 11:27:44,948 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 11:27:44,949 INFO sqlalchemy.engine.Engine INSERT INTO note_student (id, name, sex, depart, teacher, pic) VALUES (%(id)s, %(name)s, %(sex)s, %(depart)s, %(teacher)s, %(pic)s)
+2021-12-30 11:27:44,949 INFO sqlalchemy.engine.Engine [cached since 1.737e+04s ago] {'id': '1928524156', 'name': '许欢', 'sex': '男', 'depart': '软件学院 2019级', 'teacher': '孙萌倩', 'pic': 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gIoSUNDX1BST0ZJTEUAAQEAAAIYAAAAAAIQAABtbnRyUkdCIFhZWiAAAAAAAAAAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAA ... (6185 characters truncated) ... JCSldl00AfZGkffVFHpYcRQMGzacI98d/76pHQswm6Huo/qnTvE+y3hYdaLgMeVWXiMDPapp1lPJyZR39wrATXpYcSGnS6m1afyexjv4H7apX/GBxNH9jaa/00j76oH4fy/Ae6qd8S6a43Z9l/9k='}
+2021-12-30 11:27:44,977 INFO sqlalchemy.engine.Engine COMMIT
+1928524156
+2021-12-30 11:28:44,805 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 11:28:44,806 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 11:28:44,806 INFO sqlalchemy.engine.Engine [cached since 1.749e+04s ago] {'pk_1': '1928524156'}
+2021-12-30
+2021-12-29
+2021-12-30 11:28:44,834 INFO sqlalchemy.engine.Engine ROLLBACK
+***REMOVED***
+2021-12-30 12:06:39,139 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 12:06:39,139 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 12:06:39,139 INFO sqlalchemy.engine.Engine [cached since 1.976e+04s ago] {'pk_1': '***REMOVED***'}
+2021-12-30
+2021-12-29
+2021-12-30 12:06:39,168 INFO sqlalchemy.engine.Engine ROLLBACK
+***REMOVED***
+2021-12-30 12:09:46,129 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 12:09:46,129 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 12:09:46,129 INFO sqlalchemy.engine.Engine [cached since 2.06e+04s ago] {'pk_1': '***REMOVED***'}
+2021-12-30
+2021-12-29
+2021-12-30 12:09:46,161 INFO sqlalchemy.engine.Engine ROLLBACK
+1928524069
+2021-12-30 12:11:27,539 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 12:11:27,540 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-30 12:11:27,540 INFO sqlalchemy.engine.Engine [cached since 2.005e+04s ago] {'pk_1': '1928524069'}
+2021-12-30
+2021-12-29
+2021-12-30 12:11:27,569 INFO sqlalchemy.engine.Engine ROLLBACK
+[2021-12-30 23:23:48 +0000] [112037] [CRITICAL] WORKER TIMEOUT (pid:112567)
+[2021-12-30 23:23:48 +0000] [112567] [INFO] Worker exiting (pid: 112567)
+[2021-12-30 23:23:48 +0000] [142222] [INFO] Booting worker with pid: 142222
+2021-12-30 23:23:49,056 INFO sqlalchemy.engine.Engine SHOW VARIABLES LIKE 'sql_mode'
+2021-12-30 23:23:49,056 INFO sqlalchemy.engine.Engine [raw sql] {}
+2021-12-30 23:23:49,089 INFO sqlalchemy.engine.Engine SHOW VARIABLES LIKE 'lower_case_table_names'
+2021-12-30 23:23:49,089 INFO sqlalchemy.engine.Engine [generated in 0.00013s] {}
+2021-12-30 23:23:49,150 INFO sqlalchemy.engine.Engine SELECT DATABASE()
+2021-12-30 23:23:49,150 INFO sqlalchemy.engine.Engine [raw sql] {}
+2021-12-30 23:23:49,240 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-30 23:23:49,241 INFO sqlalchemy.engine.Engine SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = %(table_schema)s AND table_name = %(table_name)s
+2021-12-30 23:23:49,241 INFO sqlalchemy.engine.Engine [generated in 0.00021s] {'table_schema': 'HTU', 'table_name': 'note_student'}
+2021-12-30 23:23:49,271 INFO sqlalchemy.engine.Engine SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = %(table_schema)s AND table_name = %(table_name)s
+2021-12-30 23:23:49,272 INFO sqlalchemy.engine.Engine [cached since 0.0309s ago] {'table_schema': 'HTU', 'table_name': 'note_log'}
+2021-12-30 23:23:49,302 INFO sqlalchemy.engine.Engine COMMIT
+1928524079
+2021-12-31 00:25:41,086 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-31 00:25:41,087 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-31 00:25:41,087 INFO sqlalchemy.engine.Engine [cached since 6.476e+04s ago] {'pk_1': '1928524079'}
+2021-12-31
+2021-12-30
+2021-12-31 00:25:41,120 INFO sqlalchemy.engine.Engine ROLLBACK
+1928524079
+2021-12-31 00:25:41,250 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-31 00:25:41,252 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-31 00:25:41,252 INFO sqlalchemy.engine.Engine [generated in 0.00012s] {'pk_1': '1928524079'}
+[2021-12-31 00:25:41,252] ERROR in app: Exception on /today [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/base.py", line 1802, in _execute_context
+    self.dialect.do_execute(
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/connections.py", line 775, in _read_query_result
+    result.read()
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/connections.py", line 692, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/connections.py", line 748, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1518, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1516, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1502, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/root/HTU-Note/app.py", line 112, in note_today
+    stu = Student.query.get(id)
+  File "<string>", line 2, in get
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/util/deprecations.py", line 401, in warned
+    return fn(*args, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/orm/query.py", line 943, in get
+    return self._get_impl(ident, loading.load_on_pk_identity)
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/orm/query.py", line 947, in _get_impl
+    return self.session._get_impl(
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/orm/session.py", line 2892, in _get_impl
+    return db_load_fn(
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/orm/loading.py", line 530, in load_on_pk_identity
+    session.execute(
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/orm/session.py", line 1692, in execute
+    result = conn._execute_20(statement, params or {}, execution_options)
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/base.py", line 1614, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/sql/elements.py", line 325, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/base.py", line 1481, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/base.py", line 1845, in _execute_context
+    self._handle_dbapi_exception(
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/base.py", line 2026, in _handle_dbapi_exception
+    util.raise_(
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/util/compat.py", line 207, in raise_
+    raise exception
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/base.py", line 1802, in _execute_context
+    self.dialect.do_execute(
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/connections.py", line 775, in _read_query_result
+    result.read()
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/connections.py", line 692, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/usr/local/lib/python3.8/dist-packages/pymysql/connections.py", line 748, in _read_bytes
+    raise err.OperationalError(
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query')
+[SQL: SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s]
+[parameters: {'pk_1': '1928524079'}]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+1928524079
+2021-12-31 00:25:44,676 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-31 00:25:44,676 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-31 00:25:44,676 INFO sqlalchemy.engine.Engine [cached since 3.425s ago] {'pk_1': '1928524079'}
+2021-12-31
+2021-12-30
+2021-12-31 00:25:44,712 INFO sqlalchemy.engine.Engine ROLLBACK
+1928524069
+2021-12-31 02:46:29,125 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-31 02:46:29,125 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-31 02:46:29,125 INFO sqlalchemy.engine.Engine [cached since 7.321e+04s ago] {'pk_1': '1928524069'}
+2021-12-31
+2021-12-30
+2021-12-31 02:46:29,157 INFO sqlalchemy.engine.Engine ROLLBACK
+1928524069
+2021-12-31 02:47:13,873 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-31 02:47:13,874 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-31 02:47:13,874 INFO sqlalchemy.engine.Engine [cached since 7.325e+04s ago] {'pk_1': '1928524069'}
+2021-12-31
+2021-12-30
+2021-12-31 02:47:13,906 INFO sqlalchemy.engine.Engine ROLLBACK
+1928524069
+2021-12-31 02:53:16,163 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2021-12-31 02:53:16,163 INFO sqlalchemy.engine.Engine SELECT note_student.id AS note_student_id, note_student.name AS note_student_name, note_student.sex AS note_student_sex, note_student.depart AS note_student_depart, note_student.teacher AS note_student_teacher, note_student.pic AS note_student_pic 
+FROM note_student 
+WHERE note_student.id = %(pk_1)s
+2021-12-31 02:53:16,163 INFO sqlalchemy.engine.Engine [cached since 8855s ago] {'pk_1': '1928524069'}
+2021-12-31
+2021-12-30
+2021-12-31 02:53:16,195 INFO sqlalchemy.engine.Engine ROLLBACK
