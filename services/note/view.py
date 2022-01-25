@@ -1,15 +1,16 @@
-from flask import Flask, jsonify, request
-from flask import render_template, Blueprint
-from app import Student
+from flask import jsonify, render_template, Blueprint, request
 
-note = Blueprint('note',__name__)
+from models import Student
+from .service import *
+
+bp_note = Blueprint('bp_note',__name__)
 
 
-@note.route('/today')
+@bp_note.route('/today')
 
 
 # 根据id值获取今日的假条
-@note.route('/today')
+@bp_note.route('/today')
 def note_today():  # put application's code here
     id = request.args['id']
     print(id)
@@ -20,7 +21,7 @@ def note_today():  # put application's code here
     return render_template("index.html",stu=stu,data=data)
 
 # 根据id值获取明日的假条
-@note.route('/tomorrow')
+@bp_note.route('/tomorrow')
 def note_tomorrow():
     stu = Student.query.get(request.args['id'])
     if stu==None:
@@ -30,7 +31,7 @@ def note_tomorrow():
 
 # TODO 自定义多日假条生成
 # 根据id值获取自定义时长的假条
-@note.route('/custom')
+@bp_note.route('/custom')
 def note_custom():
     stu = Student.query.get(request.args['id'])
     sTime = int(request.args['s'])
