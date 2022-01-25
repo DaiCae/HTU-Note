@@ -1,85 +1,31 @@
 from flask import Flask, jsonify, request
-from flask import render_template
+from flask import render_template, Blueprint
 
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 # from flask_cors import cross_origin
-# from sqlalchemy.databases import mysql  # 定义MySQL特有的字段类型
 
+# from models import *
+from models import db
+from models import Student,Log
+# from models.student import Student
+# from models.log import Log
 
-import datetime
-import random
+from utils import timeUtils
+import config
+
+# /////////////////////////////////////////////////////////////////////////
+blue = Blueprint('user',__name__)
 
 # app = Flask(__name__)
 app = Flask(__name__, static_url_path='')
-# 数据库配置开始
+app.config.from_object(config)
+
+# 数据库初始化
+db.init_app(app)
+
 # /////////////////////////////////////////////////////////////////////////
 
-
-# 连接数据库
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///note.db'
-app.config['SQLALCHEMY_DATABASE_URI'] ='mysql+pymysql://root:***REMOVED***@sql.***REMOVED***:24748/HTU'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_ECHO'] = True
-
-# 实例化orm框架的操作对象，后续数据库操作，都要基于操作对象来完成
-db = SQLAlchemy(app)
-
-# 学生
-class Student(db.Model):
-    __tablename__ = 'note_student'
-    id      = db.Column(db.Integer, primary_key=True)
-    name    = db.Column(db.String(20))
-    sex     = db.Column(db.String(20))
-    depart  = db.Column(db.String(100))
-    teacher = db.Column(db.String(20))
-    pic     = db.Column(db.Text(4294967295)	)
-    
-    def __init__(self, data):
-        self.id      = data['id']
-        self.name    = data['name']
-        self.sex     = data['sex']
-        self.depart  = data['depart']
-        self.teacher = data['teacher']
-        self.pic     = data['pic']
-
-    def __repr__(self):
-        return f"{self.id} {self.name}"
-
-# 日志
-class Log(db.Model):
-    __tablename__ = 'note_log'
-    id  = db.Column(db.Integer, primary_key = True)
-    uid = db.Column(db.Integer)
-    url = db.Column(db.String(200))
-
-    def __init__(self, data):
-        self.id  = data['id']
-        self.uid = data['uid']
-        self.url = data['url']
-
-
-db.create_all()
-# 数据库配置结束
-# /////////////////////////////////////////////////////////////////////////
-
-
-# 获取相相对于今日偏移后的日期
-def getDate(day=0):
-    date = datetime.datetime.now() + datetime.timedelta(days=day)
-    date = date.strftime("%Y-%m-%d")
-    print(date)
-    return date
-
-# 获取08点-22点之间的随机时间
-def getTime():
-    hour    = random.randint(8,22)
-    minute  = random.randint(0,59)
-    
-    hour    = ('{:0>2d}'.format(hour))
-    minute  = ('{:0>2d}'.format(minute))
-    # print(hour+':'+minute)
-    return(hour+':'+minute)
 
 # 路由开始
 # /////////////////////////////////////////////////////////////////////////
@@ -143,5 +89,6 @@ def note_custom():
 if __name__ == '__main__':
     CORS(app)                                   #放行跨域请求
     app.run(host='0.0.0.0',port='5000',debug=True)
+    # app.run(host='::', port='5000', debug=True)
 
 
