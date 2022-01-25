@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
 
+
 import models
 import services
 
@@ -14,7 +15,6 @@ def create_app():
     models.init_app(app)
     services.init_app(app)
     return app
-
 
 if __name__ == '__main__':
     app = create_app()
