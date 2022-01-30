@@ -7,8 +7,6 @@ from .service import *
 bp_note = Blueprint('bp_note',__name__)
 
 
-MSG400 = jsonify({'code':400,'msg':'信息未找到!'})
-
 # 根据id值获取今日的假条
 @bp_note.route('/today')
 def note_today():  # put application's code here
@@ -16,7 +14,7 @@ def note_today():  # put application's code here
     stu = Student.query.get(id)
     saveLog(id,request.url)
     if stu==None:
-        return MSG400
+        return jsonify({'code':400,'msg':'信息未找到!'})
     else:
         data = getRandomDatetimeData(0)
         return render_template("index.html",stu=stu,data=data)
@@ -27,7 +25,7 @@ def note_tomorrow():
     stu = Student.query.get(request.args['id'])
     saveLog(id,request.url)
     if stu==None:
-        return MSG400
+        return jsonify({'code':400,'msg':'信息未找到!'})
     else:
         data = getRandomDatetimeData(1)
         return render_template("index.html",stu=stu,data=data)
@@ -41,7 +39,7 @@ def note_custom():
     # eTime = int(request.args['e'])
     saveLog(id,request.url)
     if stu==None:
-        return MSG400
+        return jsonify({'code':400,'msg':'信息未找到!'})
     else:
         data = getRandomDatetimeData(0)
         return render_template("index.html",stu=stu,data=data)

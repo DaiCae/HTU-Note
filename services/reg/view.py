@@ -26,3 +26,5 @@ def register():
         print(e)
         return jsonify({'code':500,'msg':'出现错误!'})
     return jsonify({'code':200})
+
+
