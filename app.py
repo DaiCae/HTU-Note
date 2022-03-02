@@ -16,9 +16,10 @@ def create_app():
     services.init_app(app)
     return app
 
+
+# for gunicorn run
+app = create_app()
+
 if __name__ == '__main__':
-    app = create_app()
     app.run(host='0.0.0.0', port=8000)
     # app.run(host='::', port=8000, debug=True)
-
-
