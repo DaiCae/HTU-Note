@@ -71,9 +71,6 @@ function inileftmenu() {
 <li class="nav-item">\
 <a href="/student/courses"> 首页</a>\
 </li>\
-<li class="nav-item">\
-<a href="/student/detail"> 个人资料</a>\
-</li>\
 <% } %>\
 <li class="nav-item"><a href="/<%= role%>/account?from=menu"> 账户设置/解绑</a></li><li class="nav-item"><a href="/clearcache.php?ref=/<%= role%>"> 清空登录缓存</a></li><li class="nav-item"><a href="/<%= role%>/password"> 修改密码</a></li></ul></nav>';
 $('#leftmenuarea').html(tpl2html(_menutpl, gconfig));

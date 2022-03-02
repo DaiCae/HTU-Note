@@ -39,6 +39,55 @@ function tpl2html(tpl, data) {
     return new Function(code).apply(data);
 }
 
+function text2html(_text) {
+    return _text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\r\n?|\n/g, "<br>");
+}
+
+//加载script，目前如果页面上有requirejs，对于支持amd的文件就没法用了。有requirejs的话，就用requirejs吧就不要用我了。
+function loadScript(url, callback, _key4unique) {
+    //看有没有已经加载过的
+    var _scripts = document.getElementsByTagName('script');
+    for (var _sk = 0; _sk < _scripts.length; _sk++) {
+        var _s = _scripts[_sk];
+        if (_s.innerHTML.trim() != '')//代码块
+            continue;
+        var _k4u = _s.getAttribute('key4unique');
+        var _url = _s.getAttribute('src');
+        if (
+            (typeof (_key4unique) == 'string' && typeof (_k4u) == 'string' && _k4u == _key4unique)
+            ||
+            (typeof (_url) == 'string' && _url == url)
+        ) {
+            callback();
+            return;
+        }
+    }
+
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    // && !isOpera
+    if (script.attachEvent && !(script.attachEvent.toString && script.attachEvent.toString().indexOf('[native code') < 0)) {
+        script.attachEvent('onreadystatechange', function (_evt) {
+            if (_evt.type === 'load' || (readyRegExp.test((_evt.currentTarget || _evt.srcElement).readyState))) {
+                callback(_evt);
+            }
+        });
+    } else {
+        script.addEventListener('load', function (_evt) {
+            if (_evt.type === 'load' || (readyRegExp.test((_evt.currentTarget || _evt.srcElement).readyState))) {
+                callback(_evt);
+            }
+        }, false);
+        //script.addEventListener('error', context.onScriptError, false);
+    }
+
+    if (typeof (_key4unique) != 'undefined')
+        script.setAttribute('key4unique', _key4unique);
+    script.src = url;
+    //空页面浏览器会自己补head
+    document.getElementsByTagName("head")[0].appendChild(script);
+}
+
 var ktmfautoindex = 1;
 
 function modal(_data) {
@@ -55,7 +104,7 @@ function modal_promot(_fieldname, _attr) {
     if (typeof (_attr.placeholder) != 'undefined')
         _placeholder = _attr.placeholder;
 
-    _attr['body'] = '<input type="text" class="form-control" name="' + _fieldname + '" required="required" value="' + _dft + '" placeholder="' + _placeholder + '" >';
+    _attr['body'] = '<input type="text" class="form-control" name="' + _fieldname + '" value="' + _dft + '" placeholder="' + _placeholder + '" >';
 
     _attr = $.extend({
         title: '请输入',
@@ -339,8 +388,11 @@ function html_upload_js(_eleid, role, path, options) {
 
     $('#' + _eleid).after('<input type="file" name="files[]" id="bjmfuploader_' + _eleid + '" multiple>');
     if (typeof (kkbupfileschged) != "function") {
-        $('<link rel="stylesheet" type="text/css" href="//cdn.banjimofang.com/res/upload/css/jquery.filer.css?v=20201105">').appendTo('body');
-        $('<script src="/res/upload/js/jquery.filer.min.js?20210520" type="text/javascript"></' + 'script>').appendTo('body');
+        var cdn = window.sitecdn === undefined ? '//c.d8n.cn' : window.sitecdn;
+        $('<link rel="stylesheet" type="text/css" href="' + cdn + '/res/upload/css/jquery.filer.css?v=20201105">').appendTo('body');
+
+        // 下面这个暂时不能用 cdn，否则会报 filer_default_opts 未定义
+        $('<script src="/res/upload/js/jquery.filer.min.js?2022" type="text/javascript"></' + 'script>').appendTo('body');
 
         window.kkbupfileschged = function (_filea, _id) {
             $("#" + _id).val(JSON.stringify(_filea))
@@ -384,7 +436,7 @@ function html_upload_js_auto(id, options, path) {
 
 function upload_file_directly(file, name, callback) {
     if (typeof (kkbupfileschged) != "function") {
-        $('<script src="/res/upload/js/jquery.filer.min.js?20210520" type="text/javascript"></' + 'script>').appendTo('body');
+        $('<script src="/res/upload/js/jquery.filer.min.js?2022" type="text/javascript"></' + 'script>').appendTo('body');
     }
     filer_default_opts.ossRole = get_current_role();
     filer_default_opts.ossPath = location.pathname;
@@ -823,6 +875,23 @@ function html2xls(_html, filename, worksheet, noreformat) {
     }
 }
 
+function bjmform_clear(basename) {
+    $('[name^="' + basename + '["]').each(function () {
+        $(this).val('').prop('checked', false);
+        $(this).find('+ .jFiler').remove();
+    });
+    $('[bjmfform_address]').find('select, input').val('');
+}
+
+function bjmform_ele_clear(_ele)//只清理一个元素的值
+{
+    var _type = $(_ele).attr('type');
+    if (typeof (_type) != 'undefined' && (_type == 'radio' || _type == 'checkbox'))
+        $(_ele).prop('checked', false);
+    else
+        $(_ele).val('');
+}
+
 //自定义form的各项支持
 // TODO: 如果表单中可能有上传控件，记得要设置 session(['uploadpath' => '/path'])，避免上传报来源异常错误
 function bjmform_ini(iniformdata, basename, readonly, form_id) {
@@ -867,42 +936,55 @@ function bjmform_ini(iniformdata, basename, readonly, form_id) {
         }
     });
 
+    //link_n是服务端/控制端元素，指向自己的name
+    //linkn是被控制端，指向主家儿name， 会配一个linkv对应主家的值
 
     var checklinklink = function (_ln) {
-        _va = [];
+        var _va = [];//主家的值
         $("[link_n=" + _ln + "]").each(function (__i, __v) {
             if (typeof ($(this).attr("type")) != "undefined")//radio/checkbox
             {
-                if ($(this).prop("checked")) {
-                    //_va.push($(this).val());
-                    _va.push($(this).parent().text().trim());//兼容useindex2value两种情况
+                if ($(this).attr("type") == 'text')//选日期会是这个
+                {
+                    _va.push($(this).val().trim());
+                } else {
+                    if ($(this).prop("checked")) {
+                        //_va.push($(this).val());
+                        _va.push($(this).parent().text().trim());//兼容useindex2value两种情况
+                    }
                 }
             } else {
                 //_va.push($(this).val());
                 _va.push($(this).find("option:selected").text().trim());//兼容useindex2value两种情况
             }
         });
-
+        //根据主家儿的值，来决定是否显示
         $("[linkn=" + _ln + "]").each(function (__i, __v) {
-            _lv = JSON.parse($(this).attr("linkv"));
-            _bcanshow = false;
+            var _lv = JSON.parse($(this).attr("linkv"));
+            var _bcanshow = false;
             $.each(_lv, function (_lvi, _lvv) {
                 if (jQuery.inArray(_lvv, _va) > -1)
                     _bcanshow = true;
             });
             if (_bcanshow)
-                $(this).show();
-            else
-                $(this).hide();
-
+                $(this).show("fast");
+            else {
+                $(this).hide("fast");
+                //还要清空当前里面元素的值,并联动下一级
+                $(this).find('input').each(function (_ipti, _iptv) {
+                    bjmform_ele_clear($(this));
+                    $(this).change();//通过change，如果有下一级触发下一级进行递归清空
+                });
+            }
         });
 
     };
 
     $("[link_n]").bind("change", function () {
-        __n = $(this).attr("link_n");
+        var __n = $(this).attr("link_n");
         checklinklink(__n);
     });
+
 
     $("[link_n]").each(function () {
         checklinklink($(this).attr("link_n"));
@@ -918,9 +1000,15 @@ function bjmform_ini(iniformdata, basename, readonly, form_id) {
             script.src = "/res/app_form_address.js?t=2021093001";
             document.body.appendChild(script);
         */
+        /*
         //使用的是xhr加载
-        $('<script type="text/javascript" src="/res/app_form_address.js?t=2021093001"></script>').appendTo('body');
+        $('<script type="text/javascript" src="/res/app_form_address.js?t=2021112701"></script>').appendTo('body');
         $(function () {
+            bjmform_addr_auto();
+        });
+         */
+        var cdn = window.sitecdn === undefined ? '//c.d8n.cn' : window.sitecdn;
+        loadScript(cdn + "/res/app_form_address.js", function () {
             bjmform_addr_auto();
         });
     }
@@ -934,6 +1022,8 @@ function bjmform_ini(iniformdata, basename, readonly, form_id) {
             $("[name='" + basename + "[" + k + "][]']:checked").parent().css('color', 'var(--primary)');
         });
 
+        $('.form-group[data-type] [name^="fm["]').prop('disabled', true);
+
         //上面设置过value了，此处显示文件列表
         $(".form_uploadfile").each(function () {
             _attach_html = bjmf_attachment_format($(this).val());
@@ -941,7 +1031,8 @@ function bjmform_ini(iniformdata, basename, readonly, form_id) {
             $(this).after(_attach_html);
         });
 
-
+        $('.form-group[data-type=file] .jFiler-input-dragDrop').hide();
+        $('.form-group[data-type=file] .jFiler-item-trash-action').hide();
     } else {
         //不要重复渲染
 
@@ -951,6 +1042,21 @@ function bjmform_ini(iniformdata, basename, readonly, form_id) {
         });
         //检查一下map 和gps，对数据进行初始化
         //如果有gps的话，1秒后自动调用一下autogps
+
+        //对test的dic字典辅助输入
+        var _has_dic = false;
+        $('[dic]').each(function () {
+            if ($(this).attr('dic') && $(this).attr('dic').length > 0)
+                _has_dic = true;
+        });
+        if (_has_dic) {
+            loadScript('/res/app_form_dic.js', function () {
+                dic_init()
+            });
+        }
+        //pattern的验证（验证还未启用）
+
+
     }
 }
 
@@ -1024,38 +1130,110 @@ function mapsel(_ele_query) {
 //获取gps位置
 wx_readyed = false;//wx.config调用过了,不用再调用了
 
-function autogps(_ele_query) {
+var geo_quick = [
+    {range: [35.3236, 35.332, 113.9075, 113.9225], addr: '河南省,新乡市,牧野区,河南师范大学'},
+    {range: [35.29468, 35.2989, 114.06565, 114.07241], addr: '河南省,新乡市,红旗区,新联学院'},
+    {range: [21.160, 21.169, 110.237, 110.252], addr: '广东省,湛江市,麻章区,广东海洋大学寸金学院(新湖校区)'},
+    {range: [36.17, 36.1744, 120.434, 120.440], addr: '山东省,青岛市,李沧区,巨峰路山东外贸职业学院'},
+    {range: [23.141, 23.1453, 113.3144, 113.324], addr: '广东省,广州市,天河区,广州体育学院'}
+];
+
+function gps_in_range(_lat, _lng, _gpsrange) {
+    if (_lat >= _gpsrange[0] && _lat <= _gpsrange[1] && _lng >= _gpsrange[2] && _lng <= _gpsrange[3]) {
+        return true;
+    }
+    return false
+}
+
+function gps_in_ranges(_lat, _lng, _gpsranges) {
+    var bfind = false;
+    $.each(_gpsranges, function (_gi, _gpsrange) {
+        if (gps_in_range(_lat, _lng, _gpsrange))
+            bfind = true;
+    });
+    return bfind;
+}
+
+function bjmf_geo_code_parse(_geodata)//解析不同的数据给bjmf_geo_code用
+{
+    var _addr = '';
+    var _lat = '';
+    var _lng = '';
+    if (typeof (_geodata['type']) != 'undefined' && _geodata['type'] == 'quick') {//硬代码查到的内容
+        _addr = _geodata['addr'];
+        _lat = parseFloat(_geodata['lat']).toFixed(5);
+        _lng = parseFloat(_geodata['lng']).toFixed(5);
+    } else if (typeof (_geodata['type']) != 'undefined' && _geodata['type'] == 'local') {//本地缓存内容
+        _addr = _geodata['addr'];
+        _lat = parseFloat(_geodata['lat']).toFixed(5);
+        _lng = parseFloat(_geodata['lng']).toFixed(5);
+    } else {
+        //远程获取的内容
+        _lat = _geodata.result.location.lat.toFixed(5);
+        _lng = _geodata.result.location.lng.toFixed(5);
+        var _ac = _geodata.result.address_component;
+        _addr = _ac.province + ',' + _ac.city + ',' + _ac.district + ',' + _ac.street + _ac.street_number.replace(_ac.street, '');
+
+        if (typeof (_geodata.result['formatted_addresses']) != 'undefined' && typeof (_geodata.result['formatted_addresses']['recommend']) != 'undefined')
+            _addr += _geodata.result['formatted_addresses']['recommend'];
+    }
+
+    return {
+        lat: _lat,
+        lng: _lng,
+        addr: _addr,
+        addr4bjmf: (_addr + '|' + _lat + ',' + _lng)
+    };
+}
+
+function autogps(_ele_query, _need_addr) {
     if (typeof (_ele_query) == 'undefined')
         _ele_query = '[bjmfform_autogps]';
+    if (typeof (_need_addr) == 'undefined')//默认需要addr
+        _need_addr = true;
     //微信，调用微信
     //获取微信的jsticket
-
     if (navigator.userAgent.indexOf('MicroMessenger') > -1) {
-        if (typeof (wx) == 'undefined')
-            $('<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>').appendTo('body');
-        if (wx_readyed)
-            return autogps_cb(_ele_query);
+        if (wx_readyed)//wx.config过了
+            return autogps_cb(_ele_query, _need_addr);
 
-        $.get('/weixin/jsticket?url=' + encodeURIComponent(document.location.href), function (_jssign) {
+        //已经加载了,也有前台进行wx.config的
+        if (typeof (wx_js_sign_data) != 'undefined' && typeof (wx_js_sign_data['nonceStr']) != 'undefined') {
+            if (typeof (wx_js_signed_by_myself) != 'undefined' && wx_js_signed_by_myself)
+                return;//他要自己wx.config，要自己进行wx.ready回调，咱就不管了
+
+            //到此处，页面上只是给出了signdata，还是需要我来进行注册和调用
             wx.ready(function () {
                 wx_readyed = true;
-                autogps_cb(_ele_query);
+                autogps_cb(_ele_query, _need_addr);
             });
-            wx.config({
-                debug: false,
-                appId: _jssign.appId,
-                timestamp: _jssign.timestamp,
-                nonceStr: _jssign.nonceStr,
-                signature: _jssign.signature,
-                jsApiList: [
-                    'checkJsApi',
-                    'openLocation',
-                    'getLocation',
-                    'getNetworkType'
-                ]
-            });
-        }, 'json');
+            wx.config(wx_js_sign_data);
+            return;
+        }
 
+        loadScript("//res.wx.qq.com/open/js/jweixin-1.6.0.js", function () {
+            $.get('/weixin/jsticket?url=' + encodeURIComponent(document.location.href), function (_jssign) {
+                wx.ready(function () {
+                    wx_readyed = true;
+                    autogps_cb(_ele_query, _need_addr);
+                });
+                wx.config({
+                    debug: false,
+                    appId: _jssign.appId,
+                    timestamp: _jssign.timestamp,
+                    nonceStr: _jssign.nonceStr,
+                    signature: _jssign.signature,
+                    jsApiList: [
+                        'checkJsApi',
+                        'openLocation',
+                        'getLocation',
+                        'getNetworkType'
+                    ]
+                });
+            }, 'json');
+        });
+        //if (typeof (wx) == 'undefined')
+        //    $('<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>').appendTo('body');
     } else//不是微信，使用html5，以后有app可能会用app接口
     {
         //获取位置
@@ -1063,7 +1241,63 @@ function autogps(_ele_query) {
     }
 }
 
-function autogps_cb(_ele_query) {
+function localgeo(_geo)//获取或存储lat lng addr//带addr就是存，不带就是取
+{
+    var lskey = 'geos';
+    if (window.localStorage) {
+        var _geos = [];
+        var _lgeosJson = window.localStorage.getItem(lskey);
+        if (_lgeosJson) {
+            try {
+                _geos = JSON.parse(_lgeosJson);
+            } catch (e) {
+                console.log('localStorageJSON error');
+            }
+        }
+
+        var _find = false;
+        $.each(_geos, function (_k, _v) {
+            var _diff_lat = Math.abs(parseFloat(_v.lat) - parseFloat(_geo.lat));
+            var _diff_lng = Math.abs(parseFloat(_v.lng) - parseFloat(_geo.lng));
+            if (_diff_lat <= 0.0001 && _diff_lng <= 0.0001) {
+                _find = _v;
+            }
+        });
+
+        if (typeof (_geo['addr']) == 'undefined')//不存在，说明是查找的
+        {
+            if (_find !== false) {
+                _geo['addr'] = _find.addr;
+                return _geo;
+            } else
+                return null;
+        } else {//新增的,已经有了（找到了）就不用了新增了，没有找到才新增
+            if (_find === false) {
+                _geos.push(_geo);
+                window.localStorage.setItem(lskey, JSON.stringify(_geos));
+            }
+            return _geo;
+        }
+    }
+    return null;
+}
+
+function bjmf_geo_code_cb(results) {
+    if (typeof (bjmf_geo_code) == 'undefined') {
+        console.log('未定义bjmf_geo_code', results);
+    } else {
+        var __geo4bjmf = bjmf_geo_code_parse(results);
+        localgeo(__geo4bjmf);//本地存一下
+        bjmf_geo_code(results);
+    }
+}
+
+function autogps_cb(_ele_query, _need_addr) {
+    if (typeof (_ele_query) == 'undefined')
+        _ele_query = '[bjmfform_autogps]';
+    if (typeof (_need_addr) == 'undefined')//默认需要addr
+        _need_addr = true;
+
     networkType = 'nothing';
     wx.getNetworkType({
         success: function (res) {
@@ -1073,9 +1307,68 @@ function autogps_cb(_ele_query) {
     ret = wx.getLocation({
         type: 'gcj02',//'wgs84',
         success: function (res) {
+
+            //没有bjmf_geo_code时候，做一个更新指定字段的bjmf_geo_code
+            if (typeof (bjmf_geo_code) == 'undefined')
+                window.bjmf_geo_code = function (results) {
+                    var _geo4bjmf = bjmf_geo_code_parse(results);
+                    //localgeo(_geo4bjmf);//本地存一下
+
+                    if (typeof (_ele_query) == 'undefined')
+                        _ele_query = '[bjmfform_autogps]';
+                    if ($(_ele_query).length > 0)
+                        $(_ele_query).val(_geo4bjmf.addr4bjmf);
+                }
+
+            if (!_need_addr)//只需要一个坐标，不要addr
+            {
+                return bjmf_geo_code({
+                    type: 'quick',
+                    addr: '',
+                    lat: res.latitude,
+                    lng: res.longitude
+                });
+            }
+
+
             //console.log(res);
-            $(_ele_query).val('|' + parseFloat(res.latitude).toFixed(5) + ',' + parseFloat(res.longitude).toFixed(5));
-            $('.autogps_btn_area').html('已成功获取位置');
+            if ($(_ele_query).length > 0) {
+                $(_ele_query).val('|' + parseFloat(res.latitude).toFixed(5) + ',' + parseFloat(res.longitude).toFixed(5));
+                $('.autogps_btn_area').html('已成功获取位置');
+            }
+
+
+            //1、先查本地
+            var _findinlocal = localgeo({
+                type: 'quick',
+                lat: res.latitude,
+                lng: res.longitude
+            });
+            if (_findinlocal !== null) {
+                bjmf_geo_code(_findinlocal);
+                return;
+            }
+
+
+            //2、再查常用地区硬代码
+            var find_in_local = false;
+            $.each(geo_quick, function (_gri, _grv) {
+                if (find_in_local)
+                    return;
+                if (gps_in_range(res.latitude, res.longitude, _grv.range)) {
+                    find_in_local = true;
+                    bjmf_geo_code({
+                        type: 'quick',
+                        addr: _grv.addr,
+                        lat: res.latitude,
+                        lng: res.longitude
+                    });
+                }
+            });
+            if (find_in_local)//本地硬代码已经有了就不需要进行远程查找了
+                return;
+
+            //3、再查远程解析
 
             var resUrl = "https://apis.map.qq.com/ws/geocoder/v1";
             var params = {
@@ -1085,29 +1378,14 @@ function autogps_cb(_ele_query) {
                 output: "jsonp"
             };
 
-            if (typeof (bjmf_geo_code) == 'undefined')
-                window.bjmf_geo_code = function () {
-                }
-
             $.ajax({
                 type: "get",
                 url: resUrl,
                 data: params,
                 dataType: 'jsonp',
-                jsonpCallback: "bjmf_geo_code",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名
+                jsonpCallback: "bjmf_geo_code_cb",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名
                 success: function (results) {
-                    //做成逗号分割
-                    _ac = results.result.address_component;
-                    _addr = _ac.province + ',' + _ac.city + ',' + _ac.district + ',' + _ac.street + _ac.street_number.replace(_ac.street, '');
-
-                    if (typeof (results.result['formatted_addresses']) != 'undefined' && typeof (results.result['formatted_addresses']['recommend']) != 'undefined')
-                        _addr += results.result['formatted_addresses']['recommend'];
-
-
-                    _addr = _addr + '|' + results.result.location.lat.toFixed(5) + ',' + results.result.location.lng.toFixed(5);
-
-                    //_addr = results.result.address + '|' + results.result.location.lat.toFixed(5) + ',' + results.result.location.lng.toFixed(5);
-                    $(_ele_query).val(_addr);
+                    bjmf_geo_code_cb(results);
                 },
                 error: function (errors) {
                     console.log(errors);
@@ -1165,6 +1443,8 @@ function bjmform_checkform() {
         return false;
     }
 
+    //有些浏览器会把残留file也给payload post到服务器上造成异常，前面也简单设置了form.enctype，处理一下检测情况是否好转
+    $('[type=file]').remove();
     return true;
 }
 
@@ -1191,6 +1471,8 @@ function bjmf_rdochecked_chk() {
         $(this).prev().prop("checked", "checked");
     }
     bjmf_rdochecked(".bjmfrdochk");
+    if (typeof (cb_bjmf_rdochecked_chged) != 'undefined')
+        cb_bjmf_rdochecked_chged($(this).prev());
 }
 
 function bjmf_rdochecked(tag) {
@@ -1355,6 +1637,11 @@ $(function () {
     });
 
     addRedDots();
+
+    $('.text2html').each(function () {
+        var $t = $(this);
+        $t.html(text2html($t.text()));
+    });
 });
 
 //处理上传字符串，对于datagrid，可以采用在列上formatter:bjmf_attachment_format
@@ -1661,21 +1948,20 @@ function changeQueryString(_key, _value, _baseurl) {
 var data_bjmf_course_getdata_data = {};
 
 function bjmf_course_getdata(studentSel_course_id, datatype, _callback) {
-    _vnow = parseInt((new Date()).valueOf() / 1000);
-    _ldatakey = 'cd_' + studentSel_course_id + '_' + datatype;
+    var _vnow = parseInt((new Date()).valueOf() / 1000);
+    var _ldatakey = 'cd_' + studentSel_course_id + '_' + datatype;
 
     //当前页面上是否已经有这个数据了
     if (typeof (data_bjmf_course_getdata_data[_ldatakey]) != 'undefined')
         return _callback(data_bjmf_course_getdata_data[_ldatakey]);
 
-
     if (typeof (urlRoot) == 'undefined')
         urlRoot = '/' + document.location.pathname.split('/')[1];
-    _datageturl = urlRoot + '/course/' + (studentSel_course_id || 0) + '/data/' + datatype;
+    var _datageturl = urlRoot + '/course/' + (studentSel_course_id || 0) + '/data/' + datatype;
     if (window.localStorage) {
-        _ldata = false;
-        _ldataJson = window.localStorage.getItem(_ldatakey);
-        _lastask = window.localStorage.getItem(_ldatakey + '_lask');//上次问询时间
+        var _ldata = false;
+        var _ldataJson = window.localStorage.getItem(_ldatakey);
+        var _lastask = window.localStorage.getItem(_ldatakey + '_lask');//上次问询时间
         if (_ldataJson) {
             try {
                 _ldata = JSON.parse(_ldataJson);
@@ -1684,8 +1970,8 @@ function bjmf_course_getdata(studentSel_course_id, datatype, _callback) {
             }
         }
         if (_ldata) {
-            _v = _ldata.v;
-            _ltruedata = _ldata.data;
+            var _v = _ldata.v;
+            var _ltruedata = _ldata.data;
             if (_vnow - _v < 180)//刚更新3分钟内强制不更新
             {
                 console.log(_ldatakey, '3分钟内新数据，不再问');
@@ -1740,7 +2026,6 @@ function bjmf_course_getdata(studentSel_course_id, datatype, _callback) {
                 },
                 dataType: 'json'
             });
-
         }
     }
 }
@@ -1760,15 +2045,16 @@ function hideLayUiMenuInIframe() {
 }
 
 
-function navpod(_course_id, _role) {
+function navpod(_course_id, _role, _navpod_cb) {
     bjmf_course_getdata(_course_id, 'navpod', function (_items) {
-        console.log(_items);
         _np_html = '';
         for (_np_item_key in _items) {
             _item = _items[_np_item_key];
             _np_html += navpod_item2html(_item, _course_id, _role);
         }
         $('#navpod').html(_np_html);
+        if (typeof (_navpod_cb) == 'function')
+            _navpod_cb(_items);
     });
 }
 
@@ -1791,7 +2077,8 @@ function navpod_item2html(_item, _course_id, _role) {
     } else
         _url = menucode2url(_item['id'], _course_id, _role);
 
-    _url = _url.replace('{ROLE}', _role).replace('{COURSEID}', _course_id);
+    _url = _url.replace('{ROLE}', _role).replace('{COURSEID}', _course_id);//大括号有可能被过滤掉了没替换成
+    _url = _url.replace('/ROLE/', '/' + _role + '/').replace('/COURSEID/', '/' + _course_id + '/');
 
     return tpl2html($('#tpl_navpod_item').html(), {url: _url, item: _item});
 }
@@ -1811,13 +2098,25 @@ function menucode2url(_code, _course_id, _role) {
             _url = '/{ROLE}/course/{COURSEID}/profiles';
         }
     }
+    if (_modulecode == 'activity') {
+        if (_ca.length > 1) {
+            if (_ca[1].indexOf(',') > -1)
+                _url = _url = '/{ROLE}/course/{COURSEID}/activitys?ids=' + _ca[1];
+            else
+                _url = '/{ROLE}/course/{COURSEID}/activitys/show?id=' + _ca[1];
+        } else {
+            _url = '/{ROLE}/course/{COURSEID}/activitys';
+        }
+    }
     return _url;
 }
 
-    function clearlocal() {
-        if(confirm('确认清理本地缓存?  系统可能会将一些班级学生列表保存到本地缓存，如果本地网络异常导致没有及时更新，可能会导致新加入学生不显示姓名等问题出现。可在此手动清理以加载最新数据。'))
-        {
-            localStorage.clear();
-           alert('清理完成');
-        }
+function clearlocal() {
+    if (confirm('确认清理本地缓存?  系统可能会将一些班级学生列表保存到本地缓存，如果本地网络异常导致没有及时更新，可能会导致新加入学生不显示姓名等问题出现。可在此手动清理以加载最新数据。')) {
+        localStorage.clear();
+        alert('清理完成');
     }
+}
+
+
+var loaded_app_js = true;

@@ -81,20 +81,28 @@ exam.request = function (url, cb, method, data, silent, errCb) {
     if (typeof(cb) === 'function') {
       cb(resp)
     }
-  }).fail(function (xhr) {
+  }).fail(function (xhr, textStatus, errorThrown) {
     $.hideLoading();
+    var message = xhr.statusText;
+    if (textStatus && textStatus !== xhr.statusText) {
+      message += ' (' + textStatus + ')';
+    }
+    if (errorThrown && errorThrown !== textStatus && errorThrown !== xhr.statusText) {
+      message += ' (' + errorThrown + ')';
+    }
     var resp = {
       success: false,
-      message: '保存失败：' + (xhr.statusText || '未知错误') + '。请检查网络连接'
+      message: '请求失败：' + (message || '未知错误') + '。请检查网络连接后重试。'
     };
     if (!silent) {
-      setTimeout(function () {
-        exam.error(resp.message, function () {
-          if (errCb) {
-            errCb(resp);
-          }
-        });
-      }, 400);
+      console.error(resp.message);
+      // setTimeout(function () {
+      //   exam.error(resp.message, function () {
+      //     if (errCb) {
+      //       errCb(resp);
+      //     }
+      //   });
+      // }, 400);
     } else {
       if (errCb) {
         errCb(resp);
