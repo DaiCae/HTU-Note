@@ -399,8 +399,18 @@ function html_upload_js(_eleid, role, path, options) {
         }
     }
 
-    _files = eval($("#" + _eleid + "").val())
-    if (!_files) _files = [];
+    var _files = [];
+    var _files_json = $("#" + _eleid + "").val();
+    if (_files_json.length > 5) {
+        var _files_o = JSON.parse($("#" + _eleid + "").val())
+        //出现[{name:违规被删}]导致脚本错误，导致其他问题，在此检查修复一下
+        $.each(_files_o, function (_i, _f) {
+            if (typeof (_f['file']) != 'undefined' && typeof (_f['name']) != 'undefined'&& typeof (_f['type']) != 'undefined'&& typeof (_f['size']) != 'undefined') {
+                _files.push(_f);
+            }
+        });
+    }
+
     filer_default_opts.ossRole = role;
     filer_default_opts.ossPath = path || '';
     $("#bjmfuploader_" + _eleid + "").filer($.extend({
@@ -993,20 +1003,6 @@ function bjmform_ini(iniformdata, basename, readonly, form_id) {
 
     //渲染地址选择器
     if ($('[bjmfform_address]').length > 0) {
-        /*
-            时间差有问题，执行代码时，文件还没有加载解释完
-            var script = document.createElement("script");
-            script.setAttribute("type", "text/javascript");
-            script.src = "/res/app_form_address.js?t=2021093001";
-            document.body.appendChild(script);
-        */
-        /*
-        //使用的是xhr加载
-        $('<script type="text/javascript" src="/res/app_form_address.js?t=2021112701"></script>').appendTo('body');
-        $(function () {
-            bjmform_addr_auto();
-        });
-         */
         var cdn = window.sitecdn === undefined ? '//c.d8n.cn' : window.sitecdn;
         loadScript(cdn + "/res/app_form_address.js", function () {
             bjmform_addr_auto();
@@ -1152,6 +1148,43 @@ function gps_in_ranges(_lat, _lng, _gpsranges) {
             bfind = true;
     });
     return bfind;
+}
+
+function gps_in_ranges_compatible(gps_info, ranges) {
+    if (!gps_info || !ranges) {
+        return null;
+    }
+    var lat, lng;
+    if (typeof (gps_info) === 'string') {
+        gps_info = gps_info.split(',');
+    }
+    if ($.isArray(gps_info)) {
+        lat = gps_info[0];
+        lng = gps_info[1];
+    } else if ($.isPlainObject(gps_info)) {
+        lat = gps_info.lat || gps_info.latitude;
+        lng = gps_info.lng || gps_info.longitude;
+    }
+    if (!lat || !lng) {
+        return null;
+    }
+    lat = parseFloat(lat);
+    lng = parseFloat(lng);
+    var isIn = false;
+    if ($.isArray(ranges)) {
+        if (gps_in_ranges(lat, lng, ranges)) {
+            isIn = true;
+        }
+    } else {
+        if (ranges.lat === null || ranges.lng === null || ranges.radius === null) {
+            return null;
+        }
+        var distance = geoDistance(lat, lng, ranges.lat, ranges.lng);
+        if (distance <= ranges.radius) {
+            isIn = true;
+        }
+    }
+    return isIn;
 }
 
 function bjmf_geo_code_parse(_geodata)//解析不同的数据给bjmf_geo_code用
@@ -1619,7 +1652,86 @@ function renderPagination() {
     }
 }
 
+function auto_bjmfHelp()//激活页面中的创建链接
+{//<a bjmf-help="#textid|''" help-type="iframe|null" help-url="/xxxx" help-title="创建" help-content="可以这样创建：">帮助说明</a>
+    $('[bjmf-help]').click(function () {
+        var _this = $(this);
+        _this.css('cursor', 'pointer');
+        var _type = 'alert';
+        if (_this.attr('help-type'))
+            _type = _this.attr('help-type');
+
+        if (_type == 'iframe')
+            bjmf_iframe(_this.attr('help-url'), _this.attr('help-title'));
+        else {
+            var _content = _this.attr('help-content');
+            if (!_content)//如果是大块内容，就不用写到这个参数中，直接写到一个隐藏块中等待获取
+                _content = $(_this.attr('bjmf-help')).html();
+            bjmf_alert(_content, _this.attr('help-title'));
+        }
+    });
+}
+
+function getLayer(_callback) {
+    if (typeof (layer) == 'object') {
+        _callback(layer);
+    } else {
+        var cdn = (typeof (sitecdn) == 'undefined') ? '//c.d8n.cn' : window.sitecdn;
+        loadScript(cdn + "/layer/layer.js", function () {
+            _callback(layer);
+        });
+    }
+}
+
+function bjmf_msg(_msg) {
+    getLayer(function (layer) {
+        layer.msg(_msg)
+    });
+}
+
+function bjmf_tips(_msg, _idq) {
+    getLayer(function (layer) {
+        layer.tips(_msg, _idq)
+    });
+}
+
+function bjmf_alert(_msg) {
+    getLayer(function (layer) {
+        layer.alert(_msg)
+    });
+}
+
+function bjmf_confirm(_msg, yes, cancel) {
+    getLayer(function (layer) {
+        layer.confirm(_msg, {}, yes, cancel)
+    });
+}
+
+function bjmf_iframe(_url, _title) {
+    getLayer(function (_layer) {
+        _layer.open({
+            type: 2,
+            title: _title,
+            area: [(($(window).width() * 0.9) + 'px'), (($(window).height() * 0.9) + 'px')],
+            content: _url
+        });
+    });
+}
+
+function bjmf_prompt(_msg, _callback, _default_value) {
+    getLayer(function (layer) {
+        layer.prompt({
+            value: (_default_value ? _default_value : ''),
+            title: _msg,
+        }, function (value, index, elem) {
+            _callback(value); //得到value
+            layer.close(index);
+        });
+    })
+}
+
 $(function () {
+    auto_bjmfHelp();
     autoLinkTextNodes();
 
     //自定义的radio,checkbox
@@ -2117,6 +2229,13 @@ function clearlocal() {
         alert('清理完成');
     }
 }
-
+function in_weixin()
+{
+    return navigator.userAgent.indexOf('MicroMessenger') > -1;
+}
+function in_wxapp()//在小程序浏览器中，地图等内嵌网页域名没法用
+{
+    return navigator.userAgent.indexOf('miniProgram') > -1;
+}
 
 var loaded_app_js = true;

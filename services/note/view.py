@@ -30,20 +30,30 @@ def note_tomorrow():
         data = getRandomDatetimeData(1)
         return render_template("index.html",stu=stu,data=data)
 
-# TODO 自定义多日假条生成
-# 根据id值获取自定义时长的假条
-@bp_note.route('/custom')
-def note_custom():
-    stu = Student.query.get(request.args['id'])
-    # sTime = int(request.args['s'])
-    # eTime = int(request.args['e'])
+# TODO: 随机生成请假信息和时间
+@bp_note.route('/home')
+def note_home():  # put application's code here
+    id = request.args['id']
+    stu = Student.query.get(id)
     saveLog(id,request.url)
     if stu==None:
         return jsonify({'code':400,'msg':'信息未找到!'})
     else:
         data = getRandomDatetimeData(0)
-        return render_template("index.html",stu=stu,data=data)
+        msgs = ['牙齿炎症','去医院看病','复查拿药']
+        return render_template("home.html",stu=stu,data=data,msgs=msgs)
 
+# 测试接口
+@bp_note.route('/test')
+def note_test():  # put application's code here
+    id = request.args['id']
+    stu = Student.query.get(id)
+    saveLog(id,request.url)
+    if stu==None:
+        return jsonify({'code':400,'msg':'信息未找到!'})
+    else:
+        data = getRandomDatetimeData(0)
+        return render_template("index2.html",stu=stu,data=data)
 
 def saveLog(uid,url):
     log = Log()

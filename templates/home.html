@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)https://htu.g8n.cn/student/course/31030/leaves -->
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no, viewport-fit=cover">
+    <link href="resource//weui.min.css" rel="stylesheet">
+    <link href="resource//bootstrap.min.css" rel="stylesheet">
+    <link href="resource//style.css" rel="stylesheet">
+    <link href="resource//line-awesome-nob.min.css" rel="stylesheet">
+    <script src="resource//jquery-1.12.4.min.js"></script>
+    <script src="resource//weui.min.js"></script>
+    <script src="resource//app.js"></script>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <link rel="stylesheet" href="resource//helper.css">
+    <link rel="stylesheet" href="resource//main_vue.css">
+    <title>河南师大智慧学工用户中心</title>
+    <style>
+        .fixed-header,
+        .fixed-header+header.row.m-0,
+        .e-bg-primary {
+            background: #009688 !important;
+        }
+
+        .border-primary,
+        .e-border-primary {
+            border-color: #009688 !important;
+        }
+
+        .e-primary {
+            color: #009688 !important;
+        }
+
+        @media (max-width: 800px) {
+            .layui-header {
+                background: #009688 !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="color-theme-blue push-content-right theme-light ">
+    <div class="wrapper">
+        <div class="sidebar sidebar-left" id="leftmenuarea">
+            <div class="profile-link"><a href="https://htu.g8n.cn/student/course/31030/leaves#" class="media">
+                    <div class="w-auto h-100">
+                        <figure class="avatar avatar-40"><i class="la la-user" style="font-size:40px"></i></figure>
+                    </div>
+                    <div class="media-body">
+                        <h5 class=" mb-0">{{stu['name']}} <span class="status-online bg-success"></span></h5>
+                        <p>student</p>
+                    </div>
+                </a></div>
+            <nav class="navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a href="https://htu.g8n.cn/student/courses"> 首页</a></li>
+                    <li class="nav-item"><a href="https://htu.g8n.cn/student/account?from=menu"> 账户设置/解绑</a></li>
+                    <li class="nav-item"><a href="https://htu.g8n.cn/clearcache.php?ref=/student"> 清空登录缓存</a></li>
+                    <li class="nav-item"><a href="https://htu.g8n.cn/student/password"> 修改密码</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="page" style="position: absolute;overflow-y: auto">
+            <div id="content">
+                <header class="row m-0 fixed-header">
+                    <div class="left"><a href="https://htu.g8n.cn/student/course/31030"><i
+                                class="la la-arrow-left"></i></a></div>
+                    <div class="col center"><a href="javascript:void(0);" class="logo">请假</a></div>
+                </header>
+                <div class="page-content">
+                    <div style="padding: 0px 15px;">
+                        <div class="weui-cells__title">
+                            <div class="mh--15"><a href="https://htu.g8n.cn/student/course/31030/leaves/add"
+                                    class="btn btn-link btn-block mb-30 btn-lg bg-white"><i class="la la-plus"></i>
+                                    新建请假申请
+                                </a></div> <strong>{{stu['name']}} ({{stu['id']}})</strong> 提交的请假申请
+                        </div>
+                        <div class="weui-cells weui-cells_separated weui-cells_rounded mb-20">
+
+                    <a href="today?id={{stu['id']}}" class="weui-cell weui-cell_access">
+                        <div class="weui-cell__bd">
+                            <div class="weui-cell__bd__hd"><span>病假</span> <small class="text-danger">（离校）</small></div>
+                            <div class="weui-cell__bd__bd">请假原因: 复查拿药</div>
+                            <div class="weui-cell__bd__bd">请假时间: 2022-04-01 07:28 ~ 2022-04-01 23:28</div>
+                            <div class="weui-cell__bd__bd">申请时间: 2022年03月31日 16:29</div>
+                            <p class="weui-cell__bd__bd">审核人：{{stu['teacher']}}</p>
+                            <div class="weui-cell__bd__bd_status"><span class="green">通过"助教审核"</span>
+                                <!----> <span class="text-primary pull-right link">出示假条</span></div>
+                        </div>
+                        <div class="weui-cell__ft"></div>
+                    </a>
+                    {% for msg in msgs %}
+                        <a href="https://htu.g8n.cn/student/course/31030/leaves/2048727"
+                            class="weui-cell weui-cell_access">
+                            <div class="weui-cell__bd">
+                                <div class="weui-cell__bd__hd"><span>病假</span> <small class="text-danger">（离校）</small></div>
+                                <div class="weui-cell__bd__bd">请假原因: {{msg}}</div>
+                                <div class="weui-cell__bd__bd">请假时间: 2022-03-21 08:40 ~ 2022-03-21 22:40</div>
+                                <div class="weui-cell__bd__bd">申请时间: 2022年03月20日 14:43</div>
+                                <p class="weui-cell__bd__bd">审核人：{{stu['teacher']}}</p>
+                                <div class="weui-cell__bd__bd_status"><span class="green">已销假</span>
+                                    <!---->
+                                    <!---->
+                                </div>
+                            </div>
+                            <div class="weui-cell__ft"></div>
+                        </a>
+                    {% endfor %}
+                    <a href="https://htu.g8n.cn/student/course/31030/leaves/1819623"
+                        class="weui-cell weui-cell_access">
+                        <div class="weui-cell__bd">
+                            <div class="weui-cell__bd__hd"><span>事假</span> <small class="text-danger">（离校）</small></div>
+                            <div class="weui-cell__bd__bd">请假原因: 提前回家</div>
+                            <div class="weui-cell__bd__bd">请假时间: 2021-12-30 08:01 ~ 2021-12-30 23:01</div>
+                            <div class="weui-cell__bd__bd">申请时间: 2021年12月30日 09:09</div>
+                            <!---->
+                            <div class="weui-cell__bd__bd_status"><span class="silver">已撤销</span>
+                                <!---->
+                                <!---->
+                            </div>
+                        </div>
+                        <div class="weui-cell__ft"></div>
+                    </a> 
+                    <a href="javascript:" class="text-center block font-14 mv-15">加载所有记录（不含7日前已撤销）</a>
+                </div>
+                <!---->
+                <!---->
+                <!---->
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <script src="resource//bootstrap.bundle.min.js"></script>
+    <script src="resource//main.js"></script>
+    <script src="resource//lodash.min.js"></script>
+
+    <script src="resource//vue.min.js"></script>
+
+    <script src="resource//uuid.min.js"></script>
+    <script src="resource//linq.min.js"></script>
+    <script src="resource//vuelidate.min.js"></script>
+    <script src="resource//validators.min.js"></script>
+    <script src="resource//main_vue_4m2019.js"></script>
+
+    <script>
+        var mixins = [];
+
+        var defaultMixin = {
+            methods: {
+                onLoad: function () {}
+            },
+            mounted: function () {
+                $('.vue-loading').removeClass('vue-loading');
+            }
+        }
+        mixins.push(defaultMixin)
+    </script>
+
+    <script>
+        var statusMixin = {
+            methods: {
+                rowStatusClass: function (status) {
+                    if (status === '已过期') {
+                        return 'inactive'
+                    }
+                    return ''
+                },
+
+                statusClass: function (status) {
+                    if (!status) {
+                        return ''
+                    }
+                    if (status === '尚未开始' || status.startsWith('等待')) {
+                        return 'orange'
+                    } else if (status === '已撤销') {
+                        return 'silver'
+                    } else if (status === '被退回' || status.indexOf('销假中') >= 0) {
+                        return 'red'
+                    } else if (status.startsWith('通过') || status.indexOf('审核完成') >= 0 || status === '已销假') {
+                        return 'green'
+                    }
+                    return ''
+                }
+            }
+        }
+        mixins && mixins.push(statusMixin)
+    </script>
+    <script>
+        var itemMixin = {
+            data: {
+                hasMore: true
+            },
+            methods: {
+                onLoad: function () {
+                    if (this.items.length < 10) {
+                        this.hasMore = false;
+                    }
+                },
+                reloadMore: function (cb) {
+                    this.hasMore = false
+                    return this.reload(cb, {
+                        more: true
+                    });
+                },
+                reviewed: function (item) {
+                    if ('green' !== this.statusClass(item.process)) {
+                        return false;
+                    }
+                    return item.process !== '已销假';
+                },
+
+                timeRange: function (data) {
+                    return timeStr(data.fn_907) + ' ~ ' + timeStr(data.fn_2379)
+                }
+            }
+        };
+    </script>
+
+    <script>
+        if (window.itemMixin) {
+            mixins.push(window.itemMixin)
+        }
+
+        var app = new Vue({
+            el: '#content',
+            mixins: mixins,
+            data: {
+                loading: true,
+                items: [],
+                temps: {}
+            },
+            computed: {
+                presets: function () {
+                    return _.filter(this.items, function (item) {
+                        return item.student_id === 0
+                    })
+                },
+                owns: function () {
+                    return _.filter(this.items, function (item) {
+                        return item.student_id !== 0
+                    })
+                }
+            },
+            methods: {
+                reload: function (cb, data) {
+                    this.loading = true
+                    exam.request('/student/course/31030/leaves/data', function (resp) {
+                        this.loading = false;
+                        this.items = resp.data || [];
+                        cb && cb(resp);
+
+                        this.onLoad(resp.data);
+                    }.bind(this), 'get', data);
+                }
+            },
+            mounted: function () {
+                $(function () {
+                    this.reload();
+                }.bind(this));
+            }
+        });
+    </script>
+
+    <div class="weui-loading_toast " style="display: none;">
+        <div class="weui-mask_transparent"></div>
+        <div class="weui-toast weui-animate-fade-in"> <i class="weui-loading weui-icon_toast"></i>
+            <p class="weui-toast__content">加载中...</p>
+        </div>
+    </div>
+</body>
+<div id="edge-translate-notifier-container" class="edge-translate-notifier-center"></div>
+
+</html>
