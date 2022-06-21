@@ -4,7 +4,7 @@
 DEBUG = True
 
 # SQLALCHEMY_DATABASE_URI = 'sqlite:///note.db'
-SQLALCHEMY_DATABASE_URI ='mysql+pymysql://root:***REMOVED***@sql.***REMOVED***:24748/HTU'
+SQLALCHEMY_DATABASE_URI ='mysql+pymysql://root:123456@localhost:3306/HTU'
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 SQLALCHEMY_ECHO = True
 
